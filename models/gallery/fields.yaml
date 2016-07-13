@@ -1,0 +1,33 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+
+    title:
+        label: bedard.photography::lang.galleries.form.title
+        span: left
+
+    slug:
+        label: bedard.photography::lang.galleries.form.slug
+        span: right
+        preset:
+            field: title
+            type: slug
+
+    photo_price:
+        label: bedard.photography::lang.galleries.form.photo_price
+        span: left
+        type: number
+        placeholder: '0.00'
+
+    published_at:
+        label: bedard.photography::lang.galleries.form.published_at
+        span: right
+        type: datepicker
+        mode: date
+
+    photos:
+        label: bedard.photography::lang.galleries.form.photos
+        type: fileupload
+        mode: image

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Gallery
+
+# Model Form Field configuration
+form: $/bedard/photography/models/gallery/fields.yaml
+
+# Model Class name
+modelClass: Bedard\Photography\Models\Gallery
+
+# Default redirect location
+defaultRedirect: bedard/photography/galleries
+
+# Create page
+create:
+    title: Create Gallery
+    redirect: bedard/photography/galleries/update/:id
+    redirectClose: bedard/photography/galleries
+
+# Update page
+update:
+    title: Edit Gallery
+    redirect: bedard/photography/galleries
+    redirectClose: bedard/photography/galleries
+
+# Preview page
+preview:
+    title: Preview Gallery
