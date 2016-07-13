@@ -1,27 +1,23 @@
 <?php namespace Bedard\Photography\Updates;
 
-use Bedard\Photography\Models\Gallery;
-use Carbon\Carbon;
-use Faker;
+use System\Models\File;
 use October\Rain\Database\Updates\Seeder;
+
+use Bedard\Photography\Updates\Seeders\GallerySeeder;
 
 class DevSeeder extends Seeder
 {
     public function run()
     {
         if (app()->env !== 'dev') return;
-        $this->seedGalleries(5);
+        $this->seedGalleries(10, 5);
     }
 
-    protected function seedGalleries($quantity)
+    protected function seedGalleries($galleries, $photos)
     {
-        $faker = Faker\Factory::create();
-        for ($i = 0; $i < $quantity; $i++) {
-            Gallery::create([
-                'title' => $faker->words(4, true),
-                'slug' => $faker->slug,
-            ]);
-        }
+        File::whereAttachmentType('Bedard\Photography\Models\Gallery')->delete();
+        $seeder = new GallerySeeder($photos);
+        $seeder->run($galleries);
     }
 }
 
