@@ -16,11 +16,15 @@ return [
     'galleries' => [
         'controller' => 'Galleries',
         'form' => [
+            'name' => 'Name',
             'photo_price' => 'Photo price',
             'photos' => 'Upload photos',
             'published_at' => 'Published date',
             'slug' => 'Slug',
-            'title' => 'Title',
+        ],
+        'list' => [
+            'name' => 'Name',
+            'photos_count' => 'Photos',
         ],
         'model' => 'Gallery',
         'slug' => 'Slug',

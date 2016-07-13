@@ -1,12 +1,15 @@
 <?php namespace Bedard\Photography\Models;
 
 use Model;
+use October\Rain\Database\Builder;
+use System\Models\File;
 
 /**
  * Gallery Model
  */
 class Gallery extends Model
 {
+    use \Bedard\Photography\Traits\Subqueryable;
 
     /**
      * @var string The database table used by the model.
@@ -43,4 +46,24 @@ class Gallery extends Model
     public $attachMany = [
         'photos' => 'System\Models\File'
     ];
+
+    /**
+     * Extend the list query
+     *
+     * @param  \Illuminate\Database\Query\Builder $query
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function scopeJoinPhotoCount(Builder $query)
+    {
+        $alias = 'system_files';
+        $grammar = $query->getQuery()->getGrammar();
+        $subquery = File::whereAttachmentType('Bedard\Photography\Models\Gallery')
+            ->addselect('system_files.attachment_id')
+            ->selectRaw('COUNT(' . $grammar->wrap('*') . ') as ' . $grammar->wrap('photos_count'))
+            ->groupBy('system_files.attachment_id');
+
+        return $query
+            ->addSelect($alias . '.photos_count')
+            ->joinSubquery($subquery, $alias, 'bedard_photography_galleries.id', '=', $alias . '.attachment_id');
+    }
 }

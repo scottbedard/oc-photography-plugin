@@ -40,7 +40,7 @@ class GallerySeeder
         $faker = Faker\Factory::create();
 
         return [
-            'title' => $faker->words(5, true),
+            'name' => $faker->words(5, true),
             'slug' => $faker->slug,
         ];
     }

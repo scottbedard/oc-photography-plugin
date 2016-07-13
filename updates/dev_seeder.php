@@ -2,7 +2,6 @@
 
 use System\Models\File;
 use October\Rain\Database\Updates\Seeder;
-
 use Bedard\Photography\Updates\Seeders\GallerySeeder;
 
 class DevSeeder extends Seeder

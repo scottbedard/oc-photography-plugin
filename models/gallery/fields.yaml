@@ -4,8 +4,8 @@
 
 fields:
 
-    title:
-        label: bedard.photography::lang.galleries.form.title
+    name:
+        label: bedard.photography::lang.galleries.form.name
         span: left
 
     slug:

@@ -3,6 +3,8 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
-        searchable: true
+    name:
+        label: bedard.photography::lang.galleries.list.name
+
+    photos_count:
+        label: bedard.photography::lang.galleries.list.photos_count

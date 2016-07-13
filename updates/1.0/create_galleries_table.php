@@ -13,7 +13,7 @@ class CreateGalleriesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('slug')->unique();
-            $table->string('title')->default('');
+            $table->string('name')->default('');
             $table->text('description')->default('');
             $table->decimal('photo_price', 10, 2)->unsigned()->default(0);
             $table->timestamp('published_at');
