@@ -1,3 +1,4 @@
-1.0.1:
+0.1.0:
   - First version of Photography
-  - create_galleries_table.php
+  - 1.0/create_galleries_table.php
+  - dev_seeder.php
