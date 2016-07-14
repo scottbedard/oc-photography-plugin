@@ -1,6 +1,5 @@
 <?php namespace Bedard\Photography\Api;
 
-use Bedard\Photography\Models\Gallery;
 use Bedard\Photography\Repositories\GalleryRepository;
 use Illuminate\Routing\Controller;
 
@@ -8,12 +7,14 @@ class Galleries extends Controller
 {
 
     /**
-     * Fetch galleries
+     * Fetch a page of galleries
      *
+     * @param  \Bedard\Photography\Repositories\GalleryRepository   $repository
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function index(GalleryRepository $repository)
     {
-        return $repository->get();
+        $options = input();
+        return $repository->getPage($options);
     }
 }
