@@ -6,23 +6,6 @@ use October\Rain\Database\Builder;
 trait Subqueryable {
 
     /**
-     * Select from a subquery
-     *
-     * @param  \October\Rain\Database\Builder
-     * @return \October\Rain\Database\Builder
-     */
-    public function scopeSelectSubquery($query, $subquery, $as)
-    {
-        if (empty($query->getQuery()->columns)) {
-            $query->select($this->getTable() . '.*');
-        }
-
-        return $subquery instanceof Builder
-            ? $query->selectSub($subquery->getQuery(), $as)
-            : $query->selectSub($subquery, $as);
-    }
-
-    /**
      * Join the query with a subquery. Warning, in order to use this method
      * properly, the join must be executed at the start of the query. If
      * it's added t the end of the query, the bindings won't match up.
@@ -39,6 +22,7 @@ trait Subqueryable {
     public function scopeJoinSubquery($query, $subquery, $alias, $left, $operator, $right, $join = 'join')
     {
         $self = $this->getTable() . '.*';
+
         // if (!in_array($self, $query->getQuery()->columns)) {
         //     $query->addSelect($self);
         // }
@@ -48,4 +32,21 @@ trait Subqueryable {
 
         return $query->$join($raw, $left, $operator, $right)->mergeBindings($subquery);
     }
+
+    // /**
+    //  * Select from a subquery
+    //  *
+    //  * @param  \October\Rain\Database\Builder
+    //  * @return \October\Rain\Database\Builder
+    //  */
+    // public function scopeSelectSubquery($query, $subquery, $as)
+    // {
+    //     if (empty($query->getQuery()->columns)) {
+    //         $query->select($this->getTable() . '.*');
+    //     }
+
+    //     return $subquery instanceof Builder
+    //         ? $query->selectSub($subquery->getQuery(), $as)
+    //         : $query->selectSub($subquery, $as);
+    // }
 }
