@@ -3,7 +3,6 @@
 # ===================================
 
 fields:
-
     name:
         label: bedard.photography::lang.galleries.form.name
         span: left
@@ -15,25 +14,32 @@ fields:
             field: title
             type: slug
 
-    description:
-        label: bedard.photography::lang.galleries.form.description
-        type: markdown
-        size: huge
-        mode: split
+tabs:
+    stretch: true
+    fields:
+        photo_price:
+            tab: bedard.photography::lang.galleries.form.tabs.options
+            label: bedard.photography::lang.galleries.form.photo_price
+            span: left
+            type: number
+            placeholder: '0.00'
 
-    photo_price:
-        label: bedard.photography::lang.galleries.form.photo_price
-        span: left
-        type: number
-        placeholder: '0.00'
+        published_at:
+            tab: bedard.photography::lang.galleries.form.tabs.options
+            label: bedard.photography::lang.galleries.form.published_at
+            span: right
+            type: datepicker
+            mode: date
 
-    published_at:
-        label: bedard.photography::lang.galleries.form.published_at
-        span: right
-        type: datepicker
-        mode: date
+        description:
+            tab: bedard.photography::lang.galleries.form.tabs.options
+            label: bedard.photography::lang.galleries.form.description
+            type: markdown
+            size: huge
+            mode: split
 
-    photos:
-        label: bedard.photography::lang.galleries.form.photos
-        type: fileupload
-        mode: image
+        photos:
+            tab: bedard.photography::lang.galleries.form.tabs.photos
+            label: bedard.photography::lang.galleries.form.photos
+            type: fileupload
+            mode: image
