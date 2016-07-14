@@ -10,7 +10,8 @@ use System\Models\File;
  */
 class Gallery extends Model
 {
-    use \Bedard\Photography\Traits\Subqueryable;
+    use \Bedard\Photography\Traits\Subqueryable,
+        \October\Rain\Database\Traits\Validation;
 
     /**
      * @var string The database table used by the model.
@@ -27,10 +28,17 @@ class Gallery extends Model
      */
     protected $fillable = [
         'description',
-        'title',
+        'name',
         'slug',
         'photo_price',
         'published_at',
+    ];
+
+    /**
+     * @var array Attribute casting
+     */
+    protected $casts = [
+        'photo_price' => 'float',
     ];
 
     /**
@@ -40,6 +48,15 @@ class Gallery extends Model
         'published_at',
         'created_at',
         'updated_at',
+    ];
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'name' => 'required',
+        'slug' => 'required|unique:bedard_photography_galleries',
+        'photo_price' => 'numeric|min:0',
     ];
 
     /**
