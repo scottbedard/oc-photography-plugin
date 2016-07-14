@@ -23,8 +23,10 @@ return [
             'slug' => 'Slug',
         ],
         'list' => [
+            'created_at' => 'Created',
             'name' => 'Name',
             'photos_count' => 'Photos',
+            'updated_at' => 'Updated',
         ],
         'model' => 'Gallery',
         'slug' => 'Slug',

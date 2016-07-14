@@ -15,6 +15,12 @@ fields:
             field: title
             type: slug
 
+    description:
+        label: bedard.photography::lang.galleries.form.description
+        type: markdown
+        size: huge
+        mode: split
+
     photo_price:
         label: bedard.photography::lang.galleries.form.photo_price
         span: left

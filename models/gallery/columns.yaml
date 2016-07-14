@@ -5,6 +5,16 @@
 columns:
     name:
         label: bedard.photography::lang.galleries.list.name
+        searchable: true
 
     photos_count:
         label: bedard.photography::lang.galleries.list.photos_count
+
+    created_at:
+        label: bedard.photography::lang.galleries.list.created_at
+        type: datetime
+
+    updated_at:
+        label: bedard.photography::lang.galleries.list.updated_at
+        type: datetime
+        invisible: true

@@ -1,5 +1,6 @@
 <?php namespace Bedard\Photography\Models;
 
+use Markdown;
 use Model;
 use October\Rain\Database\Builder;
 use System\Models\File;
@@ -25,6 +26,7 @@ class Gallery extends Model
      * @var array Fillable fields
      */
     protected $fillable = [
+        'description',
         'title',
         'slug',
         'photo_price',
@@ -46,6 +48,26 @@ class Gallery extends Model
     public $attachMany = [
         'photos' => 'System\Models\File'
     ];
+
+    /**
+     * Before save
+     *
+     * @return void
+     */
+    public function beforeSave()
+    {
+        $this->parseDescription();
+    }
+
+    /**
+     * Parse the description markdown
+     *
+     * @return void
+     */
+    public function parseDescription()
+    {
+        $this->description_html = Markdown::parse($this->description);
+    }
 
     /**
      * Extend the list query
