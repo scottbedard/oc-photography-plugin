@@ -25,7 +25,7 @@ return [
         'list' => [
             'created_at' => 'Created',
             'name' => 'Name',
-            'photos_count' => 'Photos',
+            'photo_count' => 'Photos',
             'updated_at' => 'Updated',
         ],
         'model' => 'Gallery',

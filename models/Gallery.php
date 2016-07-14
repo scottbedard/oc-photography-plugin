@@ -81,11 +81,11 @@ class Gallery extends Model
         $grammar = $query->getQuery()->getGrammar();
         $subquery = File::whereAttachmentType('Bedard\Photography\Models\Gallery')
             ->addselect('system_files.attachment_id')
-            ->selectRaw('COUNT(' . $grammar->wrap('*') . ') as ' . $grammar->wrap('photos_count'))
+            ->selectRaw('COUNT(' . $grammar->wrap('*') . ') as ' . $grammar->wrap('photo_count'))
             ->groupBy('system_files.attachment_id');
 
         return $query
-            ->addSelect($alias . '.photos_count')
+            ->addSelect($alias . '.photo_count')
             ->joinSubquery($subquery, $alias, 'bedard_photography_galleries.id', '=', $alias . '.attachment_id');
     }
 }

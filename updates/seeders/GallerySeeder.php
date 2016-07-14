@@ -3,7 +3,6 @@
 use Bedard\Photography\Models\Gallery;
 use Carbon\Carbon;
 use Faker;
-use System\Models\File;
 
 class GallerySeeder
 {

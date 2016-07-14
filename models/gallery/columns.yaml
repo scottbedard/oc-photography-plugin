@@ -7,8 +7,8 @@ columns:
         label: bedard.photography::lang.galleries.list.name
         searchable: true
 
-    photos_count:
-        label: bedard.photography::lang.galleries.list.photos_count
+    photo_count:
+        label: bedard.photography::lang.galleries.list.photo_count
 
     created_at:
         label: bedard.photography::lang.galleries.list.created_at

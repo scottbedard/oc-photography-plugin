@@ -46,7 +46,7 @@ class Galleries extends Controller
     {
         $query->select([
             'bedard_photography_galleries.*',
-            'system_files.photos_count',
+            'system_files.photo_count',
         ]);
     }
 }
