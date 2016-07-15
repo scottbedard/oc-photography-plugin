@@ -13,6 +13,6 @@ class GalleryRepositoryTest extends PluginTestCase
     {
         $repository = new GalleryRepository;
         $response = $repository->getPage();
-        $this->assertEquals('Illuminate\Database\Eloquent\Collection', get_class($response));
+        $this->assertEquals('October\Rain\Database\Collection', get_class($response));
     }
 }

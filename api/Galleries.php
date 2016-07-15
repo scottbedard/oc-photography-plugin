@@ -10,7 +10,7 @@ class Galleries extends Controller
      * Fetch a page of galleries
      *
      * @param  \Bedard\Photography\Repositories\GalleryRepository   $repository
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \October\Rain\Database\Collection
      */
     public function index(GalleryRepository $repository)
     {

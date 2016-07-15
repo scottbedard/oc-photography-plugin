@@ -9,7 +9,7 @@ class GalleryRepository {
      * Fetch a page of galleries
      *
      * @param  array    $options    Query options
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \October\Rain\Database\Collection
      */
     public function getPage(array $options = [])
     {
