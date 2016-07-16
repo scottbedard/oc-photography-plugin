@@ -87,9 +87,9 @@ class Gallery extends Model
     }
 
     /**
-     * Determine if the gallery is password protected
+     * Determine if the gallery is password protected.
      *
-     * @return boolean
+     * @return bool
      */
     public function isPasswordProtected()
     {
