@@ -24,12 +24,17 @@ tabs:
             type: number
             placeholder: '0.00'
 
-        published_at:
+        # published_at:
+        #     tab: bedard.photography::lang.galleries.form.tabs.options
+        #     label: bedard.photography::lang.galleries.form.published_at
+        #     span: right
+        #     type: datepicker
+        #     mode: date
+
+        password:
             tab: bedard.photography::lang.galleries.form.tabs.options
-            label: bedard.photography::lang.galleries.form.published_at
+            label: bedard.photography::lang.galleries.form.password
             span: right
-            type: datepicker
-            mode: date
 
         description:
             tab: bedard.photography::lang.galleries.form.tabs.options

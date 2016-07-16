@@ -16,6 +16,7 @@ class CreateGalleriesTable extends Migration
             $table->string('name')->default('');
             $table->text('description');
             $table->text('description_html');
+            $table->string('password')->default('');
             $table->decimal('photo_price', 10, 2)->unsigned()->default(0);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

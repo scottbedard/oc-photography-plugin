@@ -18,6 +18,7 @@ return [
         'form' => [
             'description' => 'Description',
             'name' => 'Name',
+            'password' => 'Password',
             'photo_price' => 'Photo price',
             'photos' => 'Upload photos',
             'published_at' => 'Published date',

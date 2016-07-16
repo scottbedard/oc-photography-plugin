@@ -11,6 +11,7 @@ use System\Models\File;
 class Gallery extends Model
 {
     use \Bedard\Photography\Traits\Subqueryable,
+        \October\Rain\Database\Traits\Encryptable,
         \October\Rain\Database\Traits\Validation;
 
     /**
@@ -30,6 +31,7 @@ class Gallery extends Model
         'description',
         'name',
         'slug',
+        'password',
         'photo_price',
         'published_at',
     ];
@@ -39,6 +41,13 @@ class Gallery extends Model
      */
     protected $casts = [
         'photo_price' => 'float',
+    ];
+
+    /**
+     * @var array Encryptable attributes
+     */
+    protected $encryptable = [
+        'password',
     ];
 
     /**
@@ -56,6 +65,7 @@ class Gallery extends Model
     public $rules = [
         'name' => 'required',
         'slug' => 'required|unique:bedard_photography_galleries',
+        'password' => 'between:4,255',
         'photo_price' => 'numeric|min:0',
     ];
 
@@ -74,6 +84,16 @@ class Gallery extends Model
     public function beforeSave()
     {
         $this->parseDescription();
+    }
+
+    /**
+     * Determine if the gallery is password protected
+     *
+     * @return boolean
+     */
+    public function isPasswordProtected()
+    {
+        return strlen($this->password) > 0;
     }
 
     /**

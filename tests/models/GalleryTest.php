@@ -21,7 +21,7 @@ class GalleryTest extends PluginTestCase
 
     protected function createGallery(array $options = [])
     {
-        $gallery = $this->makeGallery($options);
+        $gallery = $this->newGallery($options);
         $gallery->save();
 
         return $gallery;
@@ -48,7 +48,7 @@ class GalleryTest extends PluginTestCase
         return $file;
     }
 
-    protected function makeGallery(array $options = [])
+    protected function newGallery(array $options = [])
     {
         $faker = Faker\Factory::create();
 
@@ -76,5 +76,13 @@ class GalleryTest extends PluginTestCase
     {
         $gallery = $this->createGallery(['description' => '*Foo*']);
         $this->assertEquals('<p><em>Foo</em></p>', $gallery->description_html);
+    }
+
+    public function test_checking_if_a_gallery_is_password_protected()
+    {
+        $foo = $this->newGallery();
+        $bar = $this->newGallery(['password' => 'whatever']);
+        $this->assertFalse($foo->isPasswordProtected());
+        $this->assertTrue($bar->isPasswordProtected());
     }
 }
