@@ -6,7 +6,7 @@ use October\Rain\Database\Builder;
 use System\Models\File;
 
 /**
- * Gallery Model
+ * Gallery Model.
  */
 class Gallery extends Model
 {
@@ -63,11 +63,11 @@ class Gallery extends Model
      * @var array Relations
      */
     public $attachMany = [
-        'photos' => 'System\Models\File'
+        'photos' => 'System\Models\File',
     ];
 
     /**
-     * Before save
+     * Before save.
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class Gallery extends Model
     }
 
     /**
-     * Parse the description markdown
+     * Parse the description markdown.
      *
      * @return void
      */
@@ -87,7 +87,7 @@ class Gallery extends Model
     }
 
     /**
-     * Extend the list query
+     * Extend the list query.
      *
      * @param  \Illuminate\Database\Query\Builder $query
      * @return \Illuminate\Database\Query\Builder
@@ -98,11 +98,11 @@ class Gallery extends Model
         $grammar = $query->getQuery()->getGrammar();
         $subquery = File::whereAttachmentType('Bedard\Photography\Models\Gallery')
             ->addselect('system_files.attachment_id')
-            ->selectRaw('COUNT(' . $grammar->wrap('*') . ') as ' . $grammar->wrap('photo_count'))
+            ->selectRaw('COUNT('.$grammar->wrap('*').') as '.$grammar->wrap('photo_count'))
             ->groupBy('system_files.attachment_id');
 
         return $query
-            ->addSelect($alias . '.photo_count')
-            ->joinSubquery($subquery, $alias, 'bedard_photography_galleries.id', '=', $alias . '.attachment_id');
+            ->addSelect($alias.'.photo_count')
+            ->joinSubquery($subquery, $alias, 'bedard_photography_galleries.id', '=', $alias.'.attachment_id');
     }
 }

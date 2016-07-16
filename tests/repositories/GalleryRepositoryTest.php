@@ -5,7 +5,6 @@ use PluginTestCase;
 
 class GalleryRepositoryTest extends PluginTestCase
 {
-
     //
     // Tests
     //

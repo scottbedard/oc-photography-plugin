@@ -4,11 +4,10 @@ use Backend;
 use System\Classes\PluginBase;
 
 /**
- * Photography Plugin Information File
+ * Photography Plugin Information File.
  */
 class Plugin extends PluginBase
 {
-
     /**
      * Returns information about this plugin.
      *

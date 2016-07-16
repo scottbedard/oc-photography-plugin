@@ -2,14 +2,12 @@
 
 use Bedard\Photography\Models\Gallery;
 use Carbon\Carbon;
-use Exception;
 use Faker;
 use PluginTestCase;
 use System\Models\File;
 
 class GalleryTest extends PluginTestCase
 {
-
     //
     // Factory methods
     //
@@ -17,6 +15,7 @@ class GalleryTest extends PluginTestCase
     {
         $file = $this->makeFile($options);
         $file->save();
+
         return $file;
     }
 
@@ -24,6 +23,7 @@ class GalleryTest extends PluginTestCase
     {
         $gallery = $this->makeGallery($options);
         $gallery->save();
+
         return $gallery;
     }
 
@@ -38,8 +38,13 @@ class GalleryTest extends PluginTestCase
         ];
 
         $file = new File;
-        foreach($default as $key => $value) $file->$key = $value;
-        foreach($options as $key => $value) $file->$key = $value;
+        foreach ($default as $key => $value) {
+            $file->$key = $value;
+        }
+        foreach ($options as $key => $value) {
+            $file->$key = $value;
+        }
+
         return $file;
     }
 
