@@ -5,9 +5,8 @@ use Illuminate\Routing\Controller;
 
 class Galleries extends Controller
 {
-
     /**
-     * Fetch a page of galleries
+     * Fetch a page of galleries.
      *
      * @param  \Bedard\Photography\Repositories\GalleryRepository   $repository
      * @return \October\Rain\Database\Collection
@@ -15,6 +14,7 @@ class Galleries extends Controller
     public function index(GalleryRepository $repository)
     {
         $options = input();
+
         return $repository->getPage($options);
     }
 }

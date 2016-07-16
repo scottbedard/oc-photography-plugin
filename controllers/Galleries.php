@@ -5,7 +5,7 @@ use Backend\Classes\Controller;
 use October\Rain\Database\Builder;
 
 /**
- * Galleries Back-end Controller
+ * Galleries Back-end Controller.
  */
 class Galleries extends Controller
 {
@@ -26,7 +26,7 @@ class Galleries extends Controller
     }
 
     /**
-     * Join subqueries
+     * Join subqueries.
      *
      * @param  \Illuminate\Database\Query\Builder $query
      * @return \Illuminate\Database\Query\Builder
@@ -37,7 +37,7 @@ class Galleries extends Controller
     }
 
     /**
-     * Attach out select statements
+     * Attach out select statements.
      *
      * @param  \Illuminate\Database\Query\Builder $query
      * @return \Illuminate\Database\Query\Builder

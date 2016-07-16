@@ -3,8 +3,8 @@
 use DB;
 use October\Rain\Database\Builder;
 
-trait Subqueryable {
-
+trait Subqueryable
+{
     /**
      * Join the query with a subquery. Warning, in order to use this method
      * properly, the join must be executed at the start of the query. If
@@ -21,14 +21,14 @@ trait Subqueryable {
      */
     public function scopeJoinSubquery($query, $subquery, $alias, $left, $operator, $right, $join = 'join')
     {
-        $self = $this->getTable() . '.*';
+        $self = $this->getTable().'.*';
 
         // if (!in_array($self, $query->getQuery()->columns)) {
         //     $query->addSelect($self);
         // }
 
         $subquery = $subquery->getQuery();
-        $raw = DB::raw('(' . $subquery->toSql() . ') ' . $alias);
+        $raw = DB::raw('('.$subquery->toSql().') '.$alias);
 
         return $query->$join($raw, $left, $operator, $right)->mergeBindings($subquery);
     }
