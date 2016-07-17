@@ -62,7 +62,7 @@ return [
         'list' => [
             'created_at' => 'Created',
             'name' => 'Name',
-            'updated_at' => 'Last updated'
+            'updated_at' => 'Last updated',
         ],
         'model' => 'Watermark',
     ],
