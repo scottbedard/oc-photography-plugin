@@ -3,6 +3,7 @@
 use Markdown;
 use Model;
 use October\Rain\Database\Builder;
+use Queue;
 use System\Models\File;
 
 /**
@@ -90,6 +91,29 @@ class Gallery extends Model
     ];
 
     /**
+     * After save.
+     *
+     * @return void
+     */
+    public function afterCreate()
+    {
+        $this->queueWatermarking();
+    }
+
+    /**
+     * After update.
+     *
+     * @return void
+     */
+    public function afterUpdate()
+    {
+        // Only re-watermark the photos if something relevant has changed
+        if ($this->isDirty(['watermark_id', 'watermark_text'])) {
+            $this->queueWatermarking();
+        }
+    }
+
+    /**
      * Before save.
      *
      * @return void
@@ -120,6 +144,20 @@ class Gallery extends Model
     }
 
     /**
+     * Queue the watermarking process
+     *
+     * @return void
+     */
+    public function queueWatermarking()
+    {
+        $id = $this->id;
+        Queue::push(function($job) use ($id) {
+            $gallery = Gallery::find($id);
+            $gallery->watermarkPhotos();
+        });
+    }
+
+    /**
      * Extend the list query.
      *
      * @param  \Illuminate\Database\Query\Builder $query
@@ -137,5 +175,15 @@ class Gallery extends Model
         return $query
             ->addSelect($alias.'.photo_count')
             ->joinSubquery($subquery, $alias, 'bedard_photography_galleries.id', '=', $alias.'.attachment_id');
+    }
+
+    /**
+     * Create a watermarked version of all photos.
+     *
+     * @return void
+     */
+    public function watermarkPhotos()
+    {
+        // @todo: apply watermarking
     }
 }

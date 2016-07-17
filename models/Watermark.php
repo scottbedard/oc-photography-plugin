@@ -27,7 +27,9 @@ class Watermark extends Model
     /**
      * @var array Relations
      */
-    public $attachOne = [];
+    public $attachOne = [
+        'image' => 'System\Models\File',
+    ];
 
     public $hasMany = [
         'galleries' => 'Bedard\Photography\Models\Gallery',

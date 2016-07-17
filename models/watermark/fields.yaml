@@ -5,3 +5,8 @@
 fields:
     name:
         label: bedard.photography::lang.watermarks.form.name
+
+    image:
+        label: bedard.photography::lang.watermarks.form.image
+        type: fileupload
+        mode: image

@@ -58,6 +58,7 @@ return [
         'controller' => 'Watermarks',
         'form' => [
             'name' => 'Name',
+            'image' => 'Image',
         ],
         'list' => [
             'created_at' => 'Created',
