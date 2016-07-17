@@ -36,7 +36,7 @@ return [
             'created_at' => 'Created',
             'name' => 'Name',
             'photo_count' => 'Photos',
-            'updated_at' => 'Updated',
+            'updated_at' => 'Last updated',
         ],
         'model' => 'Gallery',
         'slug' => 'Slug',

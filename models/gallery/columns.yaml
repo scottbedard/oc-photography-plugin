@@ -12,9 +12,8 @@ columns:
 
     created_at:
         label: bedard.photography::lang.galleries.list.created_at
-        type: datetime
+        type: date
 
     updated_at:
         label: bedard.photography::lang.galleries.list.updated_at
-        type: datetime
-        invisible: true
+        type: date
