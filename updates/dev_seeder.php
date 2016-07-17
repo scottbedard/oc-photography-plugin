@@ -5,6 +5,8 @@ use October\Rain\Database\Updates\Seeder;
 use Bedard\Photography\Updates\Seeders\GallerySeeder;
 use Bedard\Photography\Updates\Seeders\WatermarkSeeder;
 
+use Bedard\Photography\Factories\GalleryFactory;
+
 class DevSeeder extends Seeder
 {
     public function run()
@@ -14,7 +16,7 @@ class DevSeeder extends Seeder
         // @todo: Seed images with watermarks
         // $this->seedWatermarks(3);
 
-        $this->seedGalleries(10, 5);
+        $this->seedGalleries(10);
     }
 
     protected function seedWatermarks($watermarks) {
@@ -22,12 +24,11 @@ class DevSeeder extends Seeder
         $seeder->run($watermarks);
     }
 
-    protected function seedGalleries($galleries, $photos)
+    protected function seedGalleries($quantity)
     {
         File::whereAttachmentType('Bedard\Photography\Models\Gallery')->delete();
-
-        $seeder = new GallerySeeder;
-        $seeder->run($galleries, $photos);
+        $factory = new GalleryFactory;
+        $factory->seed($quantity);
     }
 }
 
