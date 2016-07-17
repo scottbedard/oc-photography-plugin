@@ -126,6 +126,17 @@ class Gallery extends Model
     }
 
     /**
+     * Return the photo count or zero if undefined. This will only
+     * work after joinPhotoCount() has been added to the query.
+     *
+     * @return integer
+     */
+    public function getPhotoCountAttribute()
+    {
+        return $this->attributes['photo_count'] ?: 0;
+    }
+
+    /**
      * Determine if the gallery is password protected.
      *
      * @return bool
@@ -176,7 +187,7 @@ class Gallery extends Model
 
         return $query
             ->addSelect($alias.'.photo_count')
-            ->joinSubquery($subquery, $alias, 'bedard_photography_galleries.id', '=', $alias.'.attachment_id');
+            ->joinSubquery($subquery, $alias, 'bedard_photography_galleries.id', '=', $alias.'.attachment_id', 'leftJoin');
     }
 
     /**
