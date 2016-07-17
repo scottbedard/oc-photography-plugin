@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Watermark
+
+# Model Form Field configuration
+form: $/bedard/photography/models/watermark/fields.yaml
+
+# Model Class name
+modelClass: Bedard\Photography\Models\Watermark
+
+# Default redirect location
+defaultRedirect: bedard/photography/watermarks
+
+# Create page
+create:
+    title: Create Watermark
+    redirect: bedard/photography/watermarks/update/:id
+    redirectClose: bedard/photography/watermarks
+
+# Update page
+update:
+    title: Edit Watermark
+    redirect: bedard/photography/watermarks
+    redirectClose: bedard/photography/watermarks
+
+# Preview page
+preview:
+    title: Preview Watermark

@@ -1,0 +1,7 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: bedard.photography::lang.watermarks.list.name

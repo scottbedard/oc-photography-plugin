@@ -26,7 +26,12 @@ class GallerySeeder
      */
     public function attachPhoto(Gallery $gallery)
     {
-        $gallery->photos()->create([]);
+        $gallery->photos()->create([
+            'disk_name' => '',
+            'content_type' => '',
+            'file_name' => '',
+            'file_size' => 0,
+        ]);
     }
 
     /**
@@ -41,6 +46,7 @@ class GallerySeeder
         return [
             'name' => $faker->words(5, true),
             'slug' => $faker->slug,
+            'description' => 'An **awesome** photo gallery',
         ];
     }
 

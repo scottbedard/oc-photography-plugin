@@ -18,6 +18,8 @@ class CreateGalleriesTable extends Migration
             $table->text('description_html');
             $table->string('password')->default('');
             $table->decimal('photo_price', 10, 2)->unsigned()->default(0);
+            $table->integer('watermark_id')->unsigned()->nullable();
+            $table->string('watermark_text')->default('');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

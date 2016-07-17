@@ -12,6 +12,7 @@ class Gallery extends Model
 {
     use \Bedard\Photography\Traits\Subqueryable,
         \October\Rain\Database\Traits\Encryptable,
+        \October\Rain\Database\Traits\Purgeable,
         \October\Rain\Database\Traits\Validation;
 
     /**
@@ -34,6 +35,7 @@ class Gallery extends Model
         'password',
         'photo_price',
         'published_at',
+        'watermark_text',
     ];
 
     /**
@@ -44,6 +46,15 @@ class Gallery extends Model
     ];
 
     /**
+     * @var array Date fields
+     */
+    protected $dates = [
+        'published_at',
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
      * @var array Encryptable attributes
      */
     protected $encryptable = [
@@ -51,12 +62,10 @@ class Gallery extends Model
     ];
 
     /**
-     * @var array Date fields
+     * @var array Purgeable fields
      */
-    protected $dates = [
-        'published_at',
-        'created_at',
-        'updated_at',
+    protected $purgeable = [
+        'is_watermarked',
     ];
 
     /**
@@ -72,6 +81,10 @@ class Gallery extends Model
     /**
      * @var array Relations
      */
+    public $belongsTo = [
+        'watermark' => 'Bedard\Photography\Models\Watermark',
+    ];
+
     public $attachMany = [
         'photos' => 'System\Models\File',
     ];

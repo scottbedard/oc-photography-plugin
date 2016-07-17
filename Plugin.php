@@ -40,7 +40,16 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-        return [];
+        return [
+            'bedard.photography.galleries' => [
+                'tab'   => 'bedard.photography::lang.plugin.name',
+                'label' => 'bedard.photography::lang.permissions.galleries'
+            ],
+            'bedard.photography.watermarks' => [
+                'tab'   => 'bedard.photography::lang.plugin.name',
+                'label' => 'bedard.photography::lang.permissions.watermarks',
+            ],
+        ];
     }
 
     /**
@@ -63,6 +72,12 @@ class Plugin extends PluginBase
                         'icon'          => 'icon-folder-o',
                         'url'           => Backend::url('bedard/photography/galleries'),
                         'permissions'   => ['bedard.photography.access_galleries'],
+                    ],
+                    'watermarks' => [
+                        'label'         => 'bedard.photography::lang.watermarks.controller',
+                        'icon'          => 'icon-copyright',
+                        'url'           => Backend::url('bedard/photography/watermarks'),
+                        'permissions'   => ['bedard.photography.access_watermarks'],
                     ],
                 ],
             ],
