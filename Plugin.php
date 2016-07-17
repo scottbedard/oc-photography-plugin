@@ -1,6 +1,8 @@
 <?php namespace Bedard\Photography;
 
+use App;
 use Backend;
+use Illuminate\Foundation\AliasLoader;
 use System\Classes\PluginBase;
 
 /**
@@ -8,6 +10,19 @@ use System\Classes\PluginBase;
  */
 class Plugin extends PluginBase
 {
+    /**
+     * Boot up the plugin.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        App::register('\Intervention\Image\ImageServiceProvider');
+
+        $alias = AliasLoader::getInstance();
+        $alias->alias('Image', '\Intervention\Image\Facades\Image');
+    }
+
     /**
      * Returns information about this plugin.
      *
