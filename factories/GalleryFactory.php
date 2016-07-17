@@ -7,6 +7,19 @@ use System\Models\File;
 class GalleryFactory extends BaseFactory
 {
     /**
+     * Attach a single photo to a gallery.
+     *
+     * @param  \Bedard\Photography\Models\Gallery   $gallery
+     * @return void
+     */
+    public function attachPhoto(Gallery $gallery)
+    {
+        $photo = new File;
+        $photo->fromFile(plugins_path('bedard/photography/assets/images/dev_photo.jpg'));
+        $gallery->photos()->add($photo);
+    }
+
+    /**
      * Attach some photos to the seeded galleries.
      *
      * @param  int  $quantity
@@ -14,12 +27,9 @@ class GalleryFactory extends BaseFactory
      */
     public function attachPhotos($quantity)
     {
-        $photoPath = plugins_path('bedard/photography/assets/images/dev_photo.jpg');
         foreach ($this->collection as $gallery) {
             for ($i = 0; $i < $quantity; $i++) {
-                $photo = new File;
-                $photo->fromFile($photoPath);
-                $gallery->photos()->add($photo);
+                $this->attachPhoto($gallery);
             }
         }
     }
