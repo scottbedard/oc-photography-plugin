@@ -129,7 +129,7 @@ class Gallery extends Model
      * Return the photo count or zero if undefined. This will only
      * work after joinPhotoCount() has been added to the query.
      *
-     * @return integer
+     * @return int
      */
     public function getPhotoCountAttribute()
     {
