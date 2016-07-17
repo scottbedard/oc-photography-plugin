@@ -4,7 +4,7 @@ use BackendMenu;
 use Backend\Classes\Controller;
 
 /**
- * Watermarks Back-end Controller
+ * Watermarks Back-end Controller.
  */
 class Watermarks extends Controller
 {

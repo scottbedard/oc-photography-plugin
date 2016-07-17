@@ -43,7 +43,7 @@ class Plugin extends PluginBase
         return [
             'bedard.photography.galleries' => [
                 'tab'   => 'bedard.photography::lang.plugin.name',
-                'label' => 'bedard.photography::lang.permissions.galleries'
+                'label' => 'bedard.photography::lang.permissions.galleries',
             ],
             'bedard.photography.watermarks' => [
                 'tab'   => 'bedard.photography::lang.plugin.name',
