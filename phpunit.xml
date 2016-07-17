@@ -24,6 +24,7 @@
     <filter>
         <blacklist>
             <file>./Plugin.php</file>
+            <file>./routes.php</file>
             <directory>./updates</directory>
             <directory>./vendor</directory>
         </blacklist>
