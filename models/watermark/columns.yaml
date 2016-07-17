@@ -5,3 +5,12 @@
 columns:
     name:
         label: bedard.photography::lang.watermarks.list.name
+        searchable: true
+
+    created_at:
+        label: bedard.photography::lang.watermarks.list.created_at
+        type: date
+
+    updated_at:
+        label: bedard.photography::lang.watermarks.list.updated_at
+        type: date
