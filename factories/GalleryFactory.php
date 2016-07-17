@@ -7,7 +7,7 @@ use System\Models\File;
 class GalleryFactory extends BaseFactory
 {
     /**
-     * Attach some photos to the seeded galleries
+     * Attach some photos to the seeded galleries.
      *
      * @param  int  $quantity
      * @return void
