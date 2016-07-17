@@ -5,7 +5,7 @@ use Faker;
 abstract class BaseFactory
 {
     /**
-     * @var Faker\Factory   $faker
+     * @var Faker\Factory
      */
     protected $faker;
 
@@ -63,7 +63,7 @@ abstract class BaseFactory
     /**
      * Run the create method a given number of times.
      *
-     * @param  integer  $quantity
+     * @param  int  $quantity
      * @return void
      */
     public function seed($quantity)

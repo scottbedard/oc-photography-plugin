@@ -1,7 +1,6 @@
 <?php namespace Bedard\Photography\Factories;
 
 use Bedard\Photography\Models\Gallery;
-use Bedard\Photography\Factories\BaseFactory;
 
 class GalleryFactory extends BaseFactory
 {
