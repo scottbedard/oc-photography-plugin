@@ -3,11 +3,10 @@
 use Model;
 
 /**
- * Watermark Model
+ * Watermark Model.
  */
 class Watermark extends Model
 {
-
     /**
      * @var string The database table used by the model.
      */
@@ -33,5 +32,4 @@ class Watermark extends Model
     public $hasMany = [
         'galleries' => 'Bedard\Photography\Models\Gallery',
     ];
-
 }
