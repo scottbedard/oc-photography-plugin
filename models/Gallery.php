@@ -144,14 +144,14 @@ class Gallery extends Model
     }
 
     /**
-     * Queue the watermarking process
+     * Queue the watermarking process.
      *
      * @return void
      */
     public function queueWatermarking()
     {
         $id = $this->id;
-        Queue::push(function($job) use ($id) {
+        Queue::push(function ($job) use ($id) {
             $gallery = Gallery::find($id);
             $gallery->watermarkPhotos();
         });
