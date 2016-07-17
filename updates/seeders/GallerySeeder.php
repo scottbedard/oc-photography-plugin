@@ -3,18 +3,21 @@
 use Bedard\Photography\Models\Gallery;
 use Carbon\Carbon;
 use Faker;
+use System\Models\File;
 
 class GallerySeeder
 {
+
+    protected $placeholderPath = null;
 
     /**
      * Construct
      *
      * @param  int  $photos     The number of photos per gallery
      */
-    public function __construct($photos = 1)
+    public function __construct($photos = 0)
     {
-        $this->photos = $photos;
+        $this->placeholderPath = plugins_path('bedard/photography/assets/images/dev_photo.jpg');
     }
 
     /**
@@ -26,12 +29,9 @@ class GallerySeeder
      */
     public function attachPhoto(Gallery $gallery)
     {
-        $gallery->photos()->create([
-            'disk_name' => '',
-            'content_type' => '',
-            'file_name' => '',
-            'file_size' => 0,
-        ]);
+        $photo = new File;
+        $photo->fromFile($this->placeholderPath);
+        $gallery->photos()->add($photo);
     }
 
     /**
@@ -56,10 +56,10 @@ class GallerySeeder
      * @param  int  $quantity   The number of times to run the seeder
      * @return void
      */
-    public function run($quantity)
+    public function run($quantity, $photos)
     {
         for ($i = 0; $i < $quantity; $i++) {
-            $this->seed();
+            $this->seed($photos);
         }
     }
 
@@ -68,14 +68,13 @@ class GallerySeeder
      *
      * @return void
      */
-    public function seed()
+    public function seed($photos = 0)
     {
         $options = $this->getOptions();
         $gallery = Gallery::create($options);
 
-        // @todo: Seed real images
-        // for ($i = 0; $i < $this->photos; $i++) {
-        //     $this->attachPhoto($gallery);
-        // }
+        for ($i = 0; $i < $photos; $i++) {
+            $this->attachPhoto($gallery);
+        }
     }
 }

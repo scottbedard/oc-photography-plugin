@@ -25,8 +25,9 @@ class DevSeeder extends Seeder
     protected function seedGalleries($galleries, $photos)
     {
         File::whereAttachmentType('Bedard\Photography\Models\Gallery')->delete();
-        $seeder = new GallerySeeder($photos);
-        $seeder->run($galleries);
+
+        $seeder = new GallerySeeder;
+        $seeder->run($galleries, $photos);
     }
 }
 
