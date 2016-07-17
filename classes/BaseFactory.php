@@ -53,6 +53,20 @@ abstract class BaseFactory
     }
 
     /**
+     * Instantiate and save a new model.
+     *
+     * @param  array    $options
+     * @return object
+     */
+    public function forceCreate(array $options = [])
+    {
+        $model = $this->make($options);
+        $model->forceSave();
+
+        return $model;
+    }
+
+    /**
      * Instantiate a new model.
      *
      * @param  array    $options
@@ -79,6 +93,21 @@ abstract class BaseFactory
     {
         for ($i = 0; $i < $quantity; $i++) {
             $this->create();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Run the create method a given number of times.
+     *
+     * @param  int  $quantity
+     * @return \Bedard\Photography\Classes\BaseFactory
+     */
+    public function forceSeed($quantity)
+    {
+        for ($i = 0; $i < $quantity; $i++) {
+            $this->forceCreate();
         }
 
         return $this;
