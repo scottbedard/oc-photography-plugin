@@ -73,8 +73,9 @@ class GallerySeeder
         $options = $this->getOptions();
         $gallery = Gallery::create($options);
 
-        for ($i = 0; $i < $this->photos; $i++) {
-            $this->attachPhoto($gallery);
-        }
+        // @todo: Seed real images
+        // for ($i = 0; $i < $this->photos; $i++) {
+        //     $this->attachPhoto($gallery);
+        // }
     }
 }

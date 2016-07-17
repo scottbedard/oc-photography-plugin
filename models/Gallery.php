@@ -1,5 +1,6 @@
 <?php namespace Bedard\Photography\Models;
 
+use Bedard\Photography\Classes\Image;
 use Markdown;
 use Model;
 use October\Rain\Database\Builder;
@@ -88,6 +89,7 @@ class Gallery extends Model
 
     public $attachMany = [
         'photos' => 'System\Models\File',
+        'watermarkedPhotos' => 'System\Models\File',
     ];
 
     /**
@@ -184,6 +186,12 @@ class Gallery extends Model
      */
     public function watermarkPhotos()
     {
-        // @todo: apply watermarking
+        // Delete the old watermark images
+        $this->watermarkedPhotos()->delete();
+
+        // Itterate over our photos and create a watermarked copy
+        foreach ($this->photos as $photo) {
+            Image::watermark($photo, $this->watermark, $this->watermark_text);
+        }
     }
 }

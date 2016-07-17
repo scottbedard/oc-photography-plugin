@@ -7,6 +7,8 @@ use Model;
  */
 class Watermark extends Model
 {
+    use \October\Rain\Database\Traits\Validation;
+
     /**
      * @var string The database table used by the model.
      */
@@ -22,6 +24,14 @@ class Watermark extends Model
      */
     protected $fillable = [
         'name',
+    ];
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'name' => 'required',
+        'image' => 'required',
     ];
 
     /**

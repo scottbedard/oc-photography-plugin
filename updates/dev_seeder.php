@@ -10,7 +10,10 @@ class DevSeeder extends Seeder
     public function run()
     {
         if (app()->env !== 'dev') return;
-        $this->seedWatermarks(3);
+
+        // @todo: Seed images with watermarks
+        // $this->seedWatermarks(3);
+
         $this->seedGalleries(10, 5);
     }
 
