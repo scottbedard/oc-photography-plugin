@@ -27,7 +27,7 @@ class WatermarkFactory extends BaseFactory
     {
         $watermark = new Watermark;
 
-        $watermark->bindEvent('model.afterCreate', function() use ($watermark) {
+        $watermark->bindEvent('model.afterCreate', function () use ($watermark) {
             $image = new File;
             $image->fromFile(plugins_path('bedard/photography/assets/images/dev_watermark.png'));
             $watermark->image = $image;
