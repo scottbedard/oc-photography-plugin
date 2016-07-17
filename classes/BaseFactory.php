@@ -1,6 +1,7 @@
-<?php namespace Bedard\Photography\Factories;
+<?php namespace Bedard\Photography\Classes;
 
 use Faker;
+use October\Rain\Database\Collection;
 
 abstract class BaseFactory
 {
@@ -10,10 +11,16 @@ abstract class BaseFactory
     protected $faker;
 
     /**
+     * @var October\Rain\Database\Collection
+     */
+    public $collection;
+
+    /**
      * Construct.
      */
     public function __construct()
     {
+        $this->collection = new Collection;
         $this->faker = Faker\Factory::create();
     }
 
@@ -57,6 +64,8 @@ abstract class BaseFactory
         $model->fill($this->getDefaults());
         $model->fill($options);
 
+        $this->collection->add($model);
+
         return $model;
     }
 
@@ -64,12 +73,14 @@ abstract class BaseFactory
      * Run the create method a given number of times.
      *
      * @param  int  $quantity
-     * @return void
+     * @return \Bedard\Photography\Classes\BaseFactory
      */
     public function seed($quantity)
     {
         for ($i = 0; $i < $quantity; $i++) {
             $this->create();
         }
+
+        return $this;
     }
 }
