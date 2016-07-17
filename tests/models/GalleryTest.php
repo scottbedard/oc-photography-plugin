@@ -2,10 +2,7 @@
 
 use Bedard\Photography\Factories\GalleryFactory;
 use Bedard\Photography\Models\Gallery;
-use Carbon\Carbon;
-use Faker;
 use PluginTestCase;
-use System\Models\File;
 
 class GalleryTest extends PluginTestCase
 {
