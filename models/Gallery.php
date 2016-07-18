@@ -1,10 +1,13 @@
 <?php namespace Bedard\Photography\Models;
 
-use Bedard\Photography\Classes\Image;
+use Bedard\Photography\Classes\ImageEditor;
 use Markdown;
 use Model;
+use Image;
 use October\Rain\Database\Builder;
 use Queue;
+use Storage;
+use Symfony\Component\Filesystem\Filesystem;
 use System\Models\File;
 
 /**
@@ -92,6 +95,15 @@ class Gallery extends Model
         'watermarkedPhotos' => 'System\Models\File',
     ];
 
+    public function addWatermarkedImage($path)
+    {
+        $file = new File;
+        $file->fromFile($path);
+        $this->watermarkedPhotos()->add($file);
+        $fs = new Filesystem;
+        $fs->remove($path);
+    }
+
     /**
      * After save.
      *
@@ -99,7 +111,7 @@ class Gallery extends Model
      */
     public function afterCreate()
     {
-        $this->queueWatermarking();
+        $this->watermarkPhotos();
     }
 
     /**
@@ -111,7 +123,7 @@ class Gallery extends Model
     {
         // Only re-watermark the photos if something relevant has changed
         if ($this->isDirty(['watermark_id', 'watermark_text'])) {
-            $this->queueWatermarking();
+            $this->watermarkPhotos();
         }
     }
 
@@ -157,20 +169,6 @@ class Gallery extends Model
     }
 
     /**
-     * Queue the watermarking process.
-     *
-     * @return void
-     */
-    public function queueWatermarking()
-    {
-        $id = $this->id;
-        Queue::push(function ($job) use ($id) {
-            $gallery = Gallery::find($id);
-            $gallery->watermarkPhotos();
-        });
-    }
-
-    /**
      * Extend the list query.
      *
      * @param  \Illuminate\Database\Query\Builder $query
@@ -201,8 +199,17 @@ class Gallery extends Model
         $this->watermarkedPhotos()->delete();
 
         // Itterate over our photos and create a watermarked copy
+        $galleryId = $this->id;
+        $watermarkId = $this->watermark_id;
         foreach ($this->photos as $photo) {
-            Image::watermark($photo, $this->watermark, $this->watermark_text);
+            $photoId = $photo->id;
+            Queue::push(function() use ($galleryId, $watermarkId, $photoId) {
+                $gallery = Gallery::find($galleryId);
+                $watermark = Watermark::find($watermarkId);
+                $photo = File::find($photoId);
+                $watermark = ImageEditor::watermark($gallery, $watermark, $photo);
+                $gallery->addWatermarkedImage($watermark);
+            });
         }
     }
 }
