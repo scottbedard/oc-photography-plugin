@@ -3,10 +3,8 @@
 use Bedard\Photography\Classes\ImageEditor;
 use Markdown;
 use Model;
-use Image;
 use October\Rain\Database\Builder;
 use Queue;
-use Storage;
 use Symfony\Component\Filesystem\Filesystem;
 use System\Models\File;
 
@@ -203,7 +201,7 @@ class Gallery extends Model
         $watermarkId = $this->watermark_id;
         foreach ($this->photos as $photo) {
             $photoId = $photo->id;
-            Queue::push(function() use ($galleryId, $watermarkId, $photoId) {
+            Queue::push(function () use ($galleryId, $watermarkId, $photoId) {
                 $gallery = Gallery::find($galleryId);
                 $watermark = Watermark::find($watermarkId);
                 $photo = File::find($photoId);
