@@ -8,9 +8,8 @@ use System\Models\File;
 
 class ImageEditor
 {
-
     /**
-     * Create a watermarked version of a photo
+     * Create a watermarked version of a photo.
      *
      * @param  \Bedard\Photography\Models\Photo
      * @return \System\Models\File

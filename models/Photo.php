@@ -21,15 +21,15 @@ class Photo extends File
         parent::__construct();
 
         // Events are bound here to avoid collisions with \System\Models\File
-        static::extend(function($model) {
-            $model->bindEvent('model.afterDelete', function() use ($model) {
+        static::extend(function ($model) {
+            $model->bindEvent('model.afterDelete', function () use ($model) {
                 $model->deleteWatermarks();
             });
         });
     }
 
     /**
-     * Create watermarked photos
+     * Create watermarked photos.
      *
      * @param  \Bedard\Photography\Models\Watermark     $watermark
      * @return void
@@ -38,7 +38,7 @@ class Photo extends File
     {
         $photoId = $this->id;
         $watermarkId = $watermark->id;
-        Queue::push(function($job) use ($photoId, $watermarkId) {
+        Queue::push(function ($job) use ($photoId, $watermarkId) {
             $photo = Photo::find($photoId);
             $watermark = Watermark::find($watermarkId);
             $image = ImageEditor::createWatermarkedFile($photo, $watermark);
@@ -48,7 +48,7 @@ class Photo extends File
     }
 
     /**
-     * Sync watermarked photos
+     * Sync watermarked photos.
      *
      * @param  \Bedard\Photography\Models\Watermark|null    $watermark
      * @return void
@@ -57,13 +57,13 @@ class Photo extends File
     {
         $this->deleteWatermarks();
 
-        if (!is_null($watermark)) {
+        if (! is_null($watermark)) {
             $this->createWatermarks($watermark);
         }
     }
 
     /**
-     * Delete all watermarked photos
+     * Delete all watermarked photos.
      *
      * @return void
      */

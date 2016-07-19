@@ -3,7 +3,6 @@
 use Markdown;
 use Model;
 use October\Rain\Database\Builder;
-use Symfony\Component\Filesystem\Filesystem;
 use System\Models\File;
 
 /**
@@ -138,13 +137,13 @@ class Gallery extends Model
     }
 
     /**
-     * Purge the watermark ID
+     * Purge the watermark ID.
      *
      * @return void
      */
     public function purgeWatermarkId()
     {
-        if (!$this->is_watermarked) {
+        if (! $this->is_watermarked) {
             $this->watermark_id = null;
         }
     }
@@ -170,7 +169,7 @@ class Gallery extends Model
     }
 
     /**
-     * Watermark all photos in the gallery
+     * Watermark all photos in the gallery.
      *
      * @return void
      */
