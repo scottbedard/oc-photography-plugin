@@ -180,7 +180,7 @@ class Gallery extends Model
         // @todo: add error handling
         foreach ($this->photos()->get() as $photo) {
             $photoId = $photo->id;
-            Queue::push(function($job) use ($photoId) {
+            Queue::push(function ($job) use ($photoId) {
                 Photo::findOrFail($photoId)->syncWatermarks();
                 $job->delete();
             });

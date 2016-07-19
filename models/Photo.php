@@ -1,8 +1,6 @@
 <?php namespace Bedard\Photography\Models;
 
-use Bedard\Photography\Classes\ImageEditor;
 use Image;
-use Queue;
 use Symfony\Component\Filesystem\Filesystem;
 use System\Models\File;
 
@@ -31,7 +29,7 @@ class Photo extends File
     }
 
     /**
-     * Create a watermarked version of a photo
+     * Create a watermarked version of a photo.
      *
      * @return \System\Models\File
      */
@@ -52,7 +50,7 @@ class Photo extends File
     }
 
     /**
-     * Create watermarked photos
+     * Create watermarked photos.
      *
      * @param  \Bedard\Photography\Models\Watermark     $watermark
      * @return void
@@ -73,7 +71,7 @@ class Photo extends File
     {
         $this->deleteWatermarks();
         $this->load('attachment.watermark.image');
-        if (!is_null($this->attachment->watermark_id)) {
+        if (! is_null($this->attachment->watermark_id)) {
             $this->createWatermarks();
         }
     }
