@@ -1,4 +1,4 @@
-<?php namespace Bedard\Photography\Classes;
+<?php namespace Bedard\Photography\Factories;
 
 use Faker;
 use October\Rain\Database\Collection;

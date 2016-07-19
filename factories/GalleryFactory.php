@@ -1,6 +1,6 @@
 <?php namespace Bedard\Photography\Factories;
 
-use Bedard\Photography\Classes\BaseFactory;
+use Bedard\Photography\Factories\BaseFactory;
 use Bedard\Photography\Models\Gallery;
 use System\Models\File;
 
