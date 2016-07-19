@@ -1,7 +1,9 @@
 <?php namespace Bedard\Photography\Models;
 
 use Bedard\Photography\Classes\ImageEditor;
+use Image;
 use Queue;
+use Symfony\Component\Filesystem\Filesystem;
 use System\Models\File;
 
 class Photo extends File
@@ -29,22 +31,36 @@ class Photo extends File
     }
 
     /**
-     * Create watermarked photos.
+     * Create a watermarked version of a photo
+     *
+     * @return \System\Models\File
+     */
+    public function createWatermarkedPhoto()
+    {
+        // Create a temporary file with the watermark
+        $tempPath = temp_path("watermark_{$this->getFileName()}");
+        $image = Image::make($this->getLocalPath());
+        $image->insert($this->attachment->watermark->image->getLocalPath());
+        $image->save($tempPath);
+
+        // Convert that temporary file to a system file and clean up our mess
+        $file = File::make()->fromFile($tempPath);
+        $fs = new Filesystem;
+        $fs->remove($tempPath);
+
+        return $file;
+    }
+
+    /**
+     * Create watermarked photos
      *
      * @param  \Bedard\Photography\Models\Watermark     $watermark
      * @return void
      */
-    public function createWatermarks(Watermark $watermark)
+    public function createWatermarks()
     {
-        $photoId = $this->id;
-        $watermarkId = $watermark->id;
-        Queue::push(function ($job) use ($photoId, $watermarkId) {
-            $photo = Photo::find($photoId);
-            $watermark = Watermark::find($watermarkId);
-            $image = ImageEditor::createWatermarkedFile($photo, $watermark);
-            $photo->watermarkedPhotos()->add($image);
-            $job->delete();
-        });
+        $image = $this->createWatermarkedPhoto();
+        $this->watermarkedPhotos()->add($image);
     }
 
     /**
@@ -53,12 +69,12 @@ class Photo extends File
      * @param  \Bedard\Photography\Models\Watermark|null    $watermark
      * @return void
      */
-    public function syncWatermarks(Watermark $watermark = null)
+    public function syncWatermarks()
     {
         $this->deleteWatermarks();
-
-        if (! is_null($watermark)) {
-            $this->createWatermarks($watermark);
+        $this->load('attachment.watermark.image');
+        if (!is_null($this->attachment->watermark_id)) {
+            $this->createWatermarks();
         }
     }
 
@@ -69,7 +85,7 @@ class Photo extends File
      */
     public function deleteWatermarks()
     {
-        foreach ($this->watermarkedPhotos as $watermarkedPhoto) {
+        foreach ($this->watermarkedPhotos()->get() as $watermarkedPhoto) {
             $watermarkedPhoto->delete();
         }
     }

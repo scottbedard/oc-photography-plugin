@@ -3,6 +3,7 @@
 use Markdown;
 use Model;
 use October\Rain\Database\Builder;
+use Queue;
 use System\Models\File;
 
 /**
@@ -91,6 +92,7 @@ class Gallery extends Model
      */
     public function afterSave()
     {
+        $this->commitDeferred($this->sessionKey);
         $this->watermarkPhotos();
     }
 
@@ -175,8 +177,13 @@ class Gallery extends Model
      */
     public function watermarkPhotos()
     {
+        // @todo: add error handling
         foreach ($this->photos()->get() as $photo) {
-            $photo->syncWatermarks($this->watermark);
+            $photoId = $photo->id;
+            Queue::push(function($job) use ($photoId) {
+                Photo::findOrFail($photoId)->syncWatermarks();
+                $job->delete();
+            });
         }
     }
 }
