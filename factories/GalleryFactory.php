@@ -1,7 +1,7 @@
 <?php namespace Bedard\Photography\Factories;
 
 use Bedard\Photography\Models\Gallery;
-use System\Models\File;
+use Bedard\Photography\Models\Photo;
 
 class GalleryFactory extends BaseFactory
 {
@@ -13,7 +13,7 @@ class GalleryFactory extends BaseFactory
      */
     public function attachPhoto(Gallery $gallery)
     {
-        $photo = new File;
+        $photo = new Photo;
         $photo->fromFile(plugins_path('bedard/photography/assets/images/dev_photo.jpg'));
         $gallery->photos()->add($photo);
     }

@@ -1,10 +1,8 @@
 <?php namespace Bedard\Photography\Models;
 
-use Bedard\Photography\Classes\ImageEditor;
 use Markdown;
 use Model;
 use October\Rain\Database\Builder;
-use Queue;
 use Symfony\Component\Filesystem\Filesystem;
 use System\Models\File;
 
@@ -15,7 +13,6 @@ class Gallery extends Model
 {
     use \Bedard\Photography\Traits\Subqueryable,
         \October\Rain\Database\Traits\Encryptable,
-        \October\Rain\Database\Traits\Purgeable,
         \October\Rain\Database\Traits\Validation;
 
     /**
@@ -65,13 +62,6 @@ class Gallery extends Model
     ];
 
     /**
-     * @var array Purgeable fields
-     */
-    protected $purgeable = [
-        'is_watermarked',
-    ];
-
-    /**
      * @var array Validation rules
      */
     public $rules = [
@@ -84,45 +74,25 @@ class Gallery extends Model
     /**
      * @var array Relations
      */
+    public $attachMany = [
+        'photos' => [
+            'Bedard\Photography\Models\Photo',
+            'delete' => true,
+        ],
+    ];
+
     public $belongsTo = [
         'watermark' => 'Bedard\Photography\Models\Watermark',
     ];
-
-    public $attachMany = [
-        'photos' => 'System\Models\File',
-        'watermarkedPhotos' => 'System\Models\File',
-    ];
-
-    public function addWatermarkedImage($path)
-    {
-        $file = new File;
-        $file->fromFile($path);
-        $this->watermarkedPhotos()->add($file);
-        $fs = new Filesystem;
-        $fs->remove($path);
-    }
 
     /**
      * After save.
      *
      * @return void
      */
-    public function afterCreate()
+    public function afterSave()
     {
         $this->watermarkPhotos();
-    }
-
-    /**
-     * After update.
-     *
-     * @return void
-     */
-    public function afterUpdate()
-    {
-        // Only re-watermark the photos if something relevant has changed
-        if ($this->isDirty(['watermark_id', 'watermark_text'])) {
-            $this->watermarkPhotos();
-        }
     }
 
     /**
@@ -133,6 +103,7 @@ class Gallery extends Model
     public function beforeSave()
     {
         $this->parseDescription();
+        $this->purgeWatermarkId();
     }
 
     /**
@@ -167,6 +138,18 @@ class Gallery extends Model
     }
 
     /**
+     * Purge the watermark ID
+     *
+     * @return void
+     */
+    public function purgeWatermarkId()
+    {
+        if (!$this->is_watermarked) {
+            $this->watermark_id = null;
+        }
+    }
+
+    /**
      * Extend the list query.
      *
      * @param  \Illuminate\Database\Query\Builder $query
@@ -187,27 +170,14 @@ class Gallery extends Model
     }
 
     /**
-     * Create a watermarked version of all photos.
+     * Watermark all photos in the gallery
      *
      * @return void
      */
     public function watermarkPhotos()
     {
-        // Delete the old watermark images
-        $this->watermarkedPhotos()->delete();
-
-        // Itterate over our photos and create a watermarked copy
-        $galleryId = $this->id;
-        $watermarkId = $this->watermark_id;
-        foreach ($this->photos as $photo) {
-            $photoId = $photo->id;
-            Queue::push(function () use ($galleryId, $watermarkId, $photoId) {
-                $gallery = Gallery::find($galleryId);
-                $watermark = Watermark::find($watermarkId);
-                $photo = File::find($photoId);
-                $watermark = ImageEditor::watermark($gallery, $watermark, $photo);
-                $gallery->addWatermarkedImage($watermark);
-            });
+        foreach ($this->photos()->get() as $photo) {
+            $photo->syncWatermarks($this->watermark);
         }
     }
 }
