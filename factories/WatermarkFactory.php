@@ -1,6 +1,5 @@
 <?php namespace Bedard\Photography\Factories;
 
-use Bedard\Photography\Factories\BaseFactory;
 use Bedard\Photography\Models\Watermark;
 use System\Models\File;
 
