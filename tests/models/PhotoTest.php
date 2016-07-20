@@ -4,7 +4,6 @@ use Bedard\Photography\Factories\PhotoFactory;
 use Bedard\Photography\Factories\GalleryFactory;
 use Bedard\Photography\Factories\WatermarkFactory;
 use Bedard\Photography\Models\Gallery;
-use Bedard\Photography\Models\Photo;
 use PluginTestCase;
 use System\Models\File;
 

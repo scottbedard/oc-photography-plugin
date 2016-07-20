@@ -1,7 +1,6 @@
 <?php namespace Bedard\Photography\Factories;
 
 use Bedard\Photography\Models\Photo;
-use System\Models\File;
 
 class PhotoFactory extends BaseFactory
 {
@@ -24,6 +23,7 @@ class PhotoFactory extends BaseFactory
     {
         $photo = new Photo;
         $photo->fromFile(plugins_path('bedard/photography/assets/images/dev_photo.jpg'));
+
         return $photo;
     }
 }
