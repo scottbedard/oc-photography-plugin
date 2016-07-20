@@ -10,7 +10,10 @@ class Photo extends File
      * @var array Relations
      */
     public $attachMany = [
-        'watermarkedPhotos' => 'System\Models\File',
+        'watermarkedPhotos' => [
+            'System\Models\File',
+            'delete' => true,
+        ],
     ];
 
     /**
@@ -52,7 +55,6 @@ class Photo extends File
     /**
      * Create watermarked photos.
      *
-     * @param  \Bedard\Photography\Models\Watermark     $watermark
      * @return void
      */
     public function createWatermarks()
@@ -64,7 +66,6 @@ class Photo extends File
     /**
      * Sync watermarked photos.
      *
-     * @param  \Bedard\Photography\Models\Watermark|null    $watermark
      * @return void
      */
     public function syncWatermarks()
