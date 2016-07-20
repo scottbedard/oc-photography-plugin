@@ -25,6 +25,7 @@ class PhotoTest extends PluginTestCase
         $gallery = Gallery::get()->first();
         $watermark = $this->watermarkFactory->forceCreate();
         $gallery->watermark = $watermark;
+        $gallery->save();
         $photo = $gallery->photos()->get()->first();
         $photo->syncWatermarks();
         $this->assertEquals(2, File::count());
