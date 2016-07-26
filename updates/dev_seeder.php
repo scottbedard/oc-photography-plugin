@@ -1,6 +1,7 @@
 <?php namespace Bedard\Photography\Updates;
 
 use Bedard\Photography\Factories\GalleryFactory;
+use Bedard\Photography\Factories\RateFactory;
 use Bedard\Photography\Factories\WatermarkFactory;
 use System\Models\File;
 use October\Rain\Database\Updates\Seeder;
@@ -15,6 +16,7 @@ class DevSeeder extends Seeder
 
         $this->seedWatermarks(3);
         $this->seedGalleries(10, 3);
+        $this->seedRates(5);
     }
 
     protected function seedWatermarks($quantity) {
@@ -36,6 +38,12 @@ class DevSeeder extends Seeder
 
         $factory = new GalleryFactory;
         $factory->seed($quantity)->attachPhotos($photos);
+    }
+
+    protected function seedRates($quantity)
+    {
+        $factory = new RateFactory;
+        $factory->seed($quantity);
     }
 }
 
