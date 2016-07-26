@@ -5,6 +5,38 @@ use Bedard\Photography\Models\Gallery;
 class GalleryRepository
 {
     /**
+     * Fetch a single gallery and a page of photos
+     *
+     * @param  string                               $slug
+     * @param  array                                $options
+     * @return \October\Rain\Database\Collection
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function find($slug, array $options = [])
+    {
+        $query = Gallery::query();
+
+        // @todo: Create an ApiSettings model to define these defaults
+        if (! array_key_exists('joinPhotoCount', $options)) {
+            $options['joinPhotoCount'] = true;
+        }
+
+        if (boolval($options['joinPhotoCount'])) {
+            $query->joinPhotoCount()->select([
+                'bedard_photography_galleries.*',
+                'system_files.photo_count',
+            ]);
+        }
+
+        $gallery = $query
+            ->with('rates')
+            ->whereSlug($slug)
+            ->firstOrFail();
+
+        return $gallery;
+    }
+
+    /**
      * Fetch a page of galleries.
      *
      * @param  array    $options    Query options
