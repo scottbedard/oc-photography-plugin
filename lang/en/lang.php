@@ -48,7 +48,13 @@ return [
     //
     'permissions' => [
         'galleries' => 'Manage galleries',
+        'rates' => 'Manage rates',
         'watermarks' => 'Manage watermarks',
+    ],
+
+    'rates' => [
+        'controller' => 'Rates',
+        'model' => 'Rate',
     ],
 
     //

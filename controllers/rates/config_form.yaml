@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Rate
+
+# Model Form Field configuration
+form: $/bedard/photography/models/rate/fields.yaml
+
+# Model Class name
+modelClass: Bedard\Photography\Models\Rate
+
+# Default redirect location
+defaultRedirect: bedard/photography/rates
+
+# Create page
+create:
+    title: Create Rate
+    redirect: bedard/photography/rates/update/:id
+    redirectClose: bedard/photography/rates
+
+# Update page
+update:
+    title: Edit Rate
+    redirect: bedard/photography/rates
+    redirectClose: bedard/photography/rates
+
+# Preview page
+preview:
+    title: Preview Rate

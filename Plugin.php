@@ -60,6 +60,10 @@ class Plugin extends PluginBase
                 'tab'   => 'bedard.photography::lang.plugin.name',
                 'label' => 'bedard.photography::lang.permissions.galleries',
             ],
+            'bedard.photography.rates' => [
+                'tab'   => 'bedard.photography::lang.plugin.name',
+                'label' => 'bedard.photography::lang.permissions.rates',
+            ],
             'bedard.photography.watermarks' => [
                 'tab'   => 'bedard.photography::lang.plugin.name',
                 'label' => 'bedard.photography::lang.permissions.watermarks',
@@ -87,6 +91,12 @@ class Plugin extends PluginBase
                         'icon'          => 'icon-folder-o',
                         'url'           => Backend::url('bedard/photography/galleries'),
                         'permissions'   => ['bedard.photography.access_galleries'],
+                    ],
+                    'rates' => [
+                        'label'         => 'bedard.photography::lang.rates.controller',
+                        'icon'          => 'icon-dollar',
+                        'url'           => Backend::url('bedard/photography/rates'),
+                        'permissions'   => ['bedard.photography.access_rates'],
                     ],
                     'watermarks' => [
                         'label'         => 'bedard.photography::lang.watermarks.controller',
