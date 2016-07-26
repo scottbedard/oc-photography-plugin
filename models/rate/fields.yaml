@@ -3,6 +3,24 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+    name:
+        label: bedard.photography::lang.rates.form.name
+
+    photos:
+        label: bedard.photography::lang.rates.form.photos
+        type: number
+        placeholder: 0
+        default: 0
+        span: left
+
+    price_per_photo:
+        label: bedard.photography::lang.rates.form.price_per_photo
+        type: number
+        placeholder: '0.00'
+        default: '0.00'
+        span: right
+
+    is_active:
+        label: bedard.photography::lang.rates.form.is_active
+        type: switch
+

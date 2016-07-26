@@ -3,6 +3,11 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
-        searchable: true
+    name:
+        label: bedard.photography::lang.rates.list.name
+
+    photos:
+        label: bedard.photography::lang.rates.list.photos
+
+    price_per_photo:
+        label: bedard.photography::lang.rates.list.price_per_photo

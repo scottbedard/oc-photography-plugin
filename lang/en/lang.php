@@ -57,6 +57,17 @@ return [
     //
     'rates' => [
         'controller' => 'Rates',
+        'form' => [
+            'is_active' => 'Rate is active',
+            'name' => 'Name',
+            'photos' => 'Photo count',
+            'price_per_photo' => 'Price per photo',
+        ],
+        'list' => [
+            'name' => 'Name',
+            'photos' => 'Photo count',
+            'price_per_photo' => 'Price per photo',
+        ],
         'model' => 'Rate',
     ],
 

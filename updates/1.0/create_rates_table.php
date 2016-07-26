@@ -13,9 +13,8 @@ class CreateRatesTable extends Migration
             $table->increments('id');
             $table->string('name')->default('');
             $table->integer('photos')->unsigned()->default(0);
-            $table->decimal('rate', 10, 2)->unsigned()->default(0);
+            $table->decimal('price_per_photo', 10, 2)->unsigned()->default(0);
             $table->boolean('is_active')->default(true);
-            $table->boolean('is_global')->default(false);
             $table->timestamps();
         });
     }
