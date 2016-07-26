@@ -26,14 +26,11 @@ class Rate extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+    public $belongsToMany = [
+        'galleries' => [
+            'Bedard\Photography\Models\Gallery',
+            'table' => 'bedard_photography_gallery_rate',
+        ],
+    ];
 
 }

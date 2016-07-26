@@ -27,7 +27,7 @@ return [
             'tabs' => [
                 'options' => 'Options',
                 'photos' => 'Photos',
-                'watermark' => 'Watermark',
+                'rates' => 'Rates',
             ],
             'watermark' => 'Select watermark',
             'watermark_text' => 'Watermark text',
@@ -52,6 +52,9 @@ return [
         'watermarks' => 'Manage watermarks',
     ],
 
+    //
+    // Rates
+    //
     'rates' => [
         'controller' => 'Rates',
         'model' => 'Rate',

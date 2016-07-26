@@ -44,12 +44,12 @@ tabs:
             mode: split
 
         is_watermarked:
-            tab: bedard.photography::lang.galleries.form.tabs.watermark
+            tab: bedard.photography::lang.galleries.form.tabs.photos
             label: bedard.photography::lang.galleries.form.is_watermarked
             type: switch
 
         watermark:
-            tab: bedard.photography::lang.galleries.form.tabs.watermark
+            tab: bedard.photography::lang.galleries.form.tabs.photos
             label: bedard.photography::lang.galleries.form.watermark
             type: relation
             nameFrom: name
@@ -60,7 +60,7 @@ tabs:
                 condition: checked
 
         watermark_text:
-            tab: bedard.photography::lang.galleries.form.tabs.watermark
+            tab: bedard.photography::lang.galleries.form.tabs.photos
             label: bedard.photography::lang.galleries.form.watermark_text
             span: right
             trigger:
@@ -73,3 +73,8 @@ tabs:
             label: bedard.photography::lang.galleries.form.photos
             type: fileupload
             mode: image
+
+        rates:
+            tab: bedard.photography::lang.galleries.form.tabs.rates
+            label: bedard.photography::lang.galleries.form.rates
+            type: relation

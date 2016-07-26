@@ -3,4 +3,5 @@
   - 1.0/create_galleries_table.php
   - 1.0/create_watermarks_table.php
   - 1.0/create_rates_table.php
+  - 1.0/create_gallery_rate_table.php
   - dev_seeder.php

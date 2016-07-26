@@ -85,6 +85,13 @@ class Gallery extends Model
         'watermark' => 'Bedard\Photography\Models\Watermark',
     ];
 
+    public $belongsToMany = [
+        'rates' => [
+            'Bedard\Photography\Models\Rate',
+            'table' => 'bedard_photography_gallery_rate',
+        ],
+    ];
+
     /**
      * After save.
      *

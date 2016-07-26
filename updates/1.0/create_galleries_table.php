@@ -5,7 +5,6 @@ use October\Rain\Database\Updates\Migration;
 
 class CreateGalleriesTable extends Migration
 {
-
     public function up()
     {
         Schema::create('bedard_photography_galleries', function($table)
