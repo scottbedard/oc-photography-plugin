@@ -4,7 +4,7 @@ use BackendMenu;
 use Backend\Classes\Controller;
 
 /**
- * Rates Back-end Controller
+ * Rates Back-end Controller.
  */
 class Rates extends Controller
 {

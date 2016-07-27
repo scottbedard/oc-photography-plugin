@@ -3,7 +3,7 @@
 use Model;
 
 /**
- * Rate Model
+ * Rate Model.
  */
 class Rate extends Model
 {
@@ -57,5 +57,4 @@ class Rate extends Model
         'photos' => 'required|integer|min:0',
         'price_per_photo' => 'required|numeric|min:0',
     ];
-
 }

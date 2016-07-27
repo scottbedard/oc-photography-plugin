@@ -14,11 +14,12 @@ class Galleries extends Controller
     public function index(GalleryRepository $repository)
     {
         $options = input();
+
         return $repository->getPage($options);
     }
 
     /**
-     * Fetch a single gallery, and optionally it's watermarked photos
+     * Fetch a single gallery, and optionally it's watermarked photos.
      *
      * @param  \Bedard\Photography\Repositories\GalleryRepository   $repository
      * @param  string                                               $slug
@@ -27,6 +28,7 @@ class Galleries extends Controller
     public function show(GalleryRepository $repository, $slug)
     {
         $options = input();
+
         return $repository->find($slug, $options);
     }
 }

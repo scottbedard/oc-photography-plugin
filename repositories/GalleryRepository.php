@@ -5,7 +5,7 @@ use Bedard\Photography\Models\Gallery;
 class GalleryRepository
 {
     /**
-     * Fetch a single gallery and a page of photos
+     * Fetch a single gallery and a page of photos.
      *
      * @param  string                               $slug
      * @param  array                                $options
