@@ -42,6 +42,13 @@ tabs:
             type: markdown
             size: huge
             mode: split
+            span: left
+
+        categories:
+            tab: bedard.photography::lang.galleries.form.tabs.options
+            label: bedard.photography::lang.galleries.form.categories
+            type: relation
+            span: right
 
         is_watermarked:
             tab: bedard.photography::lang.galleries.form.tabs.photos

@@ -11,11 +11,28 @@ return [
     ],
 
     //
+    // Categories
+    //
+    'categories' => [
+        'controller' => 'Categories',
+        'form' => [
+            'name' => 'Name',
+            'slug' => 'Slug',
+        ],
+        'list' => [
+            'name' => 'Name',
+            'slug' => 'Slug',
+        ],
+        'model' => 'Category',
+    ],
+
+    //
     // Galleries
     //
     'galleries' => [
         'controller' => 'Galleries',
         'form' => [
+            'categories' => 'Categories',
             'description' => 'Description',
             'is_watermarked' => 'Watermark photos',
             'name' => 'Name',
@@ -36,6 +53,7 @@ return [
             'created_at' => 'Created',
             'name' => 'Name',
             'photo_count' => 'Photos',
+            'slug' => 'Slug',
             'updated_at' => 'Last updated',
         ],
         'model' => 'Gallery',
@@ -47,6 +65,7 @@ return [
     // Permissions
     //
     'permissions' => [
+        'categories' => 'Manage categories',
         'galleries' => 'Manage galleries',
         'rates' => 'Manage rates',
         'watermarks' => 'Manage watermarks',

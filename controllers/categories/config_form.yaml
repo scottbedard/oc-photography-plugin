@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Category
+
+# Model Form Field configuration
+form: $/bedard/photography/models/category/fields.yaml
+
+# Model Class name
+modelClass: Bedard\Photography\Models\Category
+
+# Default redirect location
+defaultRedirect: bedard/photography/categories
+
+# Create page
+create:
+    title: Create Category
+    redirect: bedard/photography/categories/update/:id
+    redirectClose: bedard/photography/categories
+
+# Update page
+update:
+    title: Edit Category
+    redirect: bedard/photography/categories
+    redirectClose: bedard/photography/categories
+
+# Preview page
+preview:
+    title: Preview Category

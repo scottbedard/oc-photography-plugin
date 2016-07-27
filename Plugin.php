@@ -56,6 +56,10 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
+            'bedard.photography.categories' => [
+                'tab'   => 'bedard.photography::lang.plugin.name',
+                'label' => 'bedard.photography::lang.permissions.categories',
+            ],
             'bedard.photography.galleries' => [
                 'tab'   => 'bedard.photography::lang.plugin.name',
                 'label' => 'bedard.photography::lang.permissions.galleries',
@@ -88,9 +92,15 @@ class Plugin extends PluginBase
                 'sideMenu' => [
                     'galleries' => [
                         'label'         => 'bedard.photography::lang.galleries.controller',
-                        'icon'          => 'icon-folder-o',
+                        'icon'          => 'icon-camera-retro',
                         'url'           => Backend::url('bedard/photography/galleries'),
                         'permissions'   => ['bedard.photography.access_galleries'],
+                    ],
+                    'categories' => [
+                        'label'         => 'bedard.photography::lang.categories.controller',
+                        'icon'          => 'icon-folder-o',
+                        'url'           => Backend::url('bedard/photography/categories'),
+                        'permissions'   => ['bedard.photography.access_categories'],
                     ],
                     'rates' => [
                         'label'         => 'bedard.photography::lang.rates.controller',
@@ -100,7 +110,7 @@ class Plugin extends PluginBase
                     ],
                     'watermarks' => [
                         'label'         => 'bedard.photography::lang.watermarks.controller',
-                        'icon'          => 'icon-copyright',
+                        'icon'          => 'icon-paint-brush',
                         'url'           => Backend::url('bedard/photography/watermarks'),
                         'permissions'   => ['bedard.photography.access_watermarks'],
                     ],

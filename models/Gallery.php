@@ -86,6 +86,10 @@ class Gallery extends Model
     ];
 
     public $belongsToMany = [
+        'categories' => [
+            'Bedard\Photography\Models\Category',
+            'table' => 'bedard_photography_category_gallery',
+        ],
         'rates' => [
             'Bedard\Photography\Models\Rate',
             'table' => 'bedard_photography_gallery_rate',
