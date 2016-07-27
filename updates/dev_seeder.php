@@ -1,5 +1,6 @@
 <?php namespace Bedard\Photography\Updates;
 
+use Bedard\Photography\Factories\CategoryFactory;
 use Bedard\Photography\Factories\GalleryFactory;
 use Bedard\Photography\Factories\RateFactory;
 use Bedard\Photography\Factories\WatermarkFactory;
@@ -14,9 +15,15 @@ class DevSeeder extends Seeder
             return;
         }
 
+        $this->seedCategories(5);
         $this->seedWatermarks(3);
         $this->seedGalleries(10, 3);
         $this->seedRates(5);
+    }
+
+    protected function seedCategories($quantity) {
+        $factory = new CategoryFactory;
+        $factory->seed($quantity);
     }
 
     protected function seedWatermarks($quantity) {
