@@ -1,7 +1,11 @@
 <?php namespace Bedard\Photography\Controllers;
 
-use BackendMenu;
 use Backend\Classes\Controller;
+use BackendMenu;
+use Bedard\Photography\Models\Category;
+use Bedard\Photography\Models\Gallery;
+use Flash;
+use Lang;
 use October\Rain\Database\Builder;
 
 /**
@@ -31,6 +35,18 @@ class Galleries extends Controller
     }
 
     /**
+     * List index
+     *
+     * @param  integer|null     $userId
+     * @return void
+     */
+    public function index($userId = null)
+    {
+        $this->loadCategories();
+        $this->asExtension('ListController')->index();
+    }
+
+    /**
      * Join subqueries.
      *
      * @param  \Illuminate\Database\Query\Builder $query
@@ -53,5 +69,37 @@ class Galleries extends Controller
             'bedard_photography_galleries.*',
             'system_files.photo_count',
         ]);
+    }
+
+    /**
+     * Load the categories
+     *
+     * @return void
+     */
+    public function loadCategories()
+    {
+        $this->vars['categories'] = Category::orderBy('name')->get();
+    }
+
+    /**
+     * Add galleries to a category via the toolbar
+     *
+     * @return void
+     */
+    public function onAddToCategory()
+    {
+        $categoryId = post('category_id');
+        $galleryIds = post('checked');
+
+        if ($categoryId && $galleryIds && is_array($galleryIds) && count($galleryIds)) {
+            $galleries = Gallery::find($galleryIds);
+            foreach ($galleries as $gallery) {
+                $gallery->categories()->attach($categoryId);
+            }
+
+            Flash::success(Lang::get('bedard.photography::lang.galleries.list.attached_to_category'));
+        }
+
+        return $this->listRefresh();
     }
 }

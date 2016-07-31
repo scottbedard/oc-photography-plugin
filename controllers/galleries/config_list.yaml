@@ -5,6 +5,9 @@
 # Model List Column configuration
 list: $/bedard/photography/models/gallery/columns.yaml
 
+# List filter configuration
+filter: config_filter.yaml
+
 # Model Class name
 modelClass: Bedard\Photography\Models\Gallery
 

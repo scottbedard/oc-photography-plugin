@@ -50,6 +50,9 @@ return [
             'watermark_text' => 'Watermark text',
         ],
         'list' => [
+            'attach_to_category' => 'Add to category',
+            'attached_to_category' => 'Successfully added to category.',
+            'category_filter' => 'Categories',
             'created_at' => 'Created',
             'name' => 'Name',
             'photo_count' => 'Photos',

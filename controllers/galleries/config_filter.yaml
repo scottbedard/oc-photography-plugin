@@ -1,0 +1,11 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+
+    category:
+        label: bedard.photography::lang.galleries.list.category_filter
+        modelClass: Bedard\Photography\Models\Category
+        scope: inCategories
+        nameFrom: name

@@ -20,4 +20,38 @@
         data-stripe-load-indicator>
         <?= e(trans('backend::lang.list.delete_selected')) ?>
     </button>
+
+    <div class="dropdown dropdown-fixed">
+        <button
+            type="button"
+            disabled="disabled"
+            data-trigger-action="enable"
+            data-trigger=".control-list input[type=checkbox]"
+            data-trigger-condition="checked"
+            class="btn btn-default oc-icon-folder-o"
+            data-toggle="dropdown">
+            <?= e(trans('bedard.photography::lang.galleries.list.attach_to_category')) ?>
+        </button>
+        <ul
+            role="menu"
+            class="dropdown-menu"
+            data-dropdown-title="<?= e(trans('bedard.photography::lang.galleries.list.attach_to_category')) ?>">
+            <?php foreach ($categories as $category): ?>
+                <li role="presentation">
+                    <a
+                        href="#"
+                        tabindex="-1"
+                        role="menuitem"
+                        class="oc-icon-plus"
+                        onclick="$(this).data('request-data', {
+                            category_id: <?= $category->id ?>,
+                            checked: $('.control-list').listWidget('getChecked')
+                        })"
+                        data-request="onAddToCategory">
+                        <?= $category->name ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 </div>

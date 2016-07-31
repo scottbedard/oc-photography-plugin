@@ -181,6 +181,21 @@ class Gallery extends Model
             ->joinSubquery($subquery, $alias, 'bedard_photography_galleries.id', '=', $alias.'.attachment_id', 'leftJoin');
     }
 
+
+    /**
+     * Returns galleries in any of the supplied categories
+     *
+     * @param  \Illuminate\Database\Query\Builder   $query
+     * @param  array                                $categoryIds
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function scopeInCategories($query, $categoryIds)
+    {
+        return $query->whereHas('categories', function($q) use ($categoryIds) {
+            $q->whereIn('bedard_photography_categories.id', $categoryIds);
+        });
+    }
+
     /**
      * Watermark all photos in the gallery.
      *
