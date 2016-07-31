@@ -6,7 +6,6 @@ use Illuminate\Routing\Controller;
 
 class Category extends Controller
 {
-
     /**
      * Fetch a single category, and a page of it's galleries.
      *
