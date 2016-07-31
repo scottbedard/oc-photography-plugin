@@ -3,7 +3,7 @@
 use Model;
 
 /**
- * Category Model
+ * Category Model.
  */
 class Category extends Model
 {
@@ -45,5 +45,4 @@ class Category extends Model
             'table' => 'bedard_photography_category_gallery',
         ],
     ];
-
 }

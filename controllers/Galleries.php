@@ -35,9 +35,9 @@ class Galleries extends Controller
     }
 
     /**
-     * List index
+     * List index.
      *
-     * @param  integer|null     $userId
+     * @param  int|null     $userId
      * @return void
      */
     public function index($userId = null)
@@ -72,7 +72,7 @@ class Galleries extends Controller
     }
 
     /**
-     * Load the categories
+     * Load the categories.
      *
      * @return void
      */
@@ -82,7 +82,7 @@ class Galleries extends Controller
     }
 
     /**
-     * Add galleries to a category via the toolbar
+     * Add galleries to a category via the toolbar.
      *
      * @return void
      */
