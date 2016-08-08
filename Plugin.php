@@ -125,9 +125,8 @@ class Plugin extends PluginBase
         ];
     }
 
-
     /**
-     * Register settings pages
+     * Register settings pages.
      *
      * @return  array
      */

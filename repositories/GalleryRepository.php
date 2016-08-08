@@ -1,7 +1,6 @@
 <?php namespace Bedard\Photography\Repositories;
 
 use Bedard\Photography\Models\Gallery;
-use System\Models\File;
 
 class GalleryRepository
 {
@@ -38,7 +37,7 @@ class GalleryRepository
         $publicProperties = ['id', 'watermarkedPhotos'];
         foreach ($gallery->photos as &$photo) {
             foreach (array_keys($photo->attributes) as $key) {
-                if (!in_array($key, $publicProperties)) {
+                if (! in_array($key, $publicProperties)) {
                     unset($photo[$key]);
                 }
             }
