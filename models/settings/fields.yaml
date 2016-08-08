@@ -1,0 +1,15 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+
+    stripe_secret_key:
+        label: bedard.photography::lang.settings.stripe_secret_key
+        placeholder: bedard.photography::lang.settings.stripe_secret_key_placeholder
+        span: left
+
+    stripe_publishable_key:
+        label: bedard.photography::lang.settings.stripe_publishable_key
+        placeholder: bedard.photography::lang.settings.stripe_publishable_key_placeholder
+        span: right

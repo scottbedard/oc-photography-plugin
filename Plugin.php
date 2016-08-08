@@ -114,7 +114,34 @@ class Plugin extends PluginBase
                         'url'           => Backend::url('bedard/photography/watermarks'),
                         'permissions'   => ['bedard.photography.access_watermarks'],
                     ],
+                    'settings' => [
+                        'label'         => 'bedard.photography::lang.settings.controller',
+                        'icon'          => 'icon-cog',
+                        'url'           => Backend::url('system/settings/update/bedard/photography/settings'),
+                        'permissions'   => ['bedard.photography.settings'],
+                    ],
                 ],
+            ],
+        ];
+    }
+
+
+    /**
+     * Register settings pages
+     *
+     * @return  array
+     */
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label'         => 'bedard.photography::lang.settings.controller',
+                'description'   => 'bedard.photography::lang.settings.description',
+                'category'      => 'bedard.photography::lang.plugin.name',
+                'class'         => 'Bedard\Photography\Models\Settings',
+                'permissions'   => ['bedard.photography.settings'],
+                'icon'          => 'icon-cog',
+                'order'         => 100,
             ],
         ];
     }

@@ -18,7 +18,7 @@ class DevSeeder extends Seeder
         $this->seedCategories(5);
         $this->seedWatermarks(3);
         $this->seedGalleries(10, 3);
-        $this->seedRates(5);
+        $this->seedRates();
     }
 
     protected function seedCategories($quantity) {
@@ -47,10 +47,13 @@ class DevSeeder extends Seeder
         $factory->seed($quantity)->attachPhotos($photos);
     }
 
-    protected function seedRates($quantity)
+    protected function seedRates()
     {
         $factory = new RateFactory;
-        $factory->seed($quantity);
+        $factory->create(['name' => '1 to 5', 'photos' => 1, 'price_per_photo' => 10]);
+        $factory->create(['name' => '6 to 10', 'photos' => 6, 'price_per_photo' => 8]);
+        $factory->create(['name' => '11 to 15', 'photos' => 11, 'price_per_photo' => 6]);
+        $factory->create(['name' => '16+', 'photos' => 16, 'price_per_photo' => 5]);
     }
 }
 

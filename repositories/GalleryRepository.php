@@ -1,6 +1,7 @@
 <?php namespace Bedard\Photography\Repositories;
 
 use Bedard\Photography\Models\Gallery;
+use System\Models\File;
 
 class GalleryRepository
 {
@@ -29,9 +30,21 @@ class GalleryRepository
         }
 
         $gallery = $query
-            ->with('rates')
+            ->with(['photos.watermarkedPhotos', 'rates'])
             ->whereSlug($slug)
             ->firstOrFail();
+
+        // Remove source photos from the response
+        $publicProperties = ['id', 'watermarkedPhotos'];
+        foreach ($gallery->photos as &$photo) {
+            foreach (array_keys($photo->attributes) as $key) {
+                if (!in_array($key, $publicProperties)) {
+                    unset($photo[$key]);
+                }
+            }
+
+            $photo->gallery_id = $gallery->id;
+        }
 
         return $gallery;
     }

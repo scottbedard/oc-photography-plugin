@@ -94,6 +94,18 @@ return [
     ],
 
     //
+    // Settings
+    //
+    'settings' => [
+        'controller' => 'Settings',
+        'description' => 'Manage photography settings',
+        'stripe_secret_key' => 'Stripe secret key',
+        'stripe_secret_key_placeholder' => 'Enter your secret API key',
+        'stripe_publishable_key' => 'Stripe publishable key',
+        'stripe_publishable_key_placeholder' => 'Enter your publishable API key',
+    ],
+
+    //
     // Watermarks
     //
     'watermarks' => [
