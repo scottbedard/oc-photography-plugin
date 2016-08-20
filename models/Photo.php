@@ -6,6 +6,12 @@ use System\Models\File;
 
 class Photo extends File
 {
+
+    /**
+     * @var array Hidden fields from array/json access
+     */
+    protected $hidden = ['attachment_type', 'is_public'];
+
     /**
      * @var array Relations
      */
@@ -14,6 +20,10 @@ class Photo extends File
             'System\Models\File',
             'delete' => true,
         ],
+    ];
+
+    public $belongsToMany = [
+        'orders' => 'Bedard\Photography\Models\Order',
     ];
 
     /**

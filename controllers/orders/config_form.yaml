@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Order
+
+# Model Form Field configuration
+form: $/bedard/photography/models/order/fields.yaml
+
+# Model Class name
+modelClass: Bedard\Photography\Models\Order
+
+# Default redirect location
+defaultRedirect: bedard/photography/orders
+
+# Create page
+create:
+    title: Create Order
+    redirect: bedard/photography/orders/update/:id
+    redirectClose: bedard/photography/orders
+
+# Update page
+update:
+    title: Edit Order
+    redirect: bedard/photography/orders
+    redirectClose: bedard/photography/orders
+
+# Preview page
+preview:
+    title: Preview Order

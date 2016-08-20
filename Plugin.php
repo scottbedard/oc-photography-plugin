@@ -56,6 +56,10 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
+            'bedard.photography.orders' => [
+                'tab'   => 'bedard.photography::lang.plugin.name',
+                'label' => 'bedard.photography::lang.permissions.orders',
+            ],
             'bedard.photography.categories' => [
                 'tab'   => 'bedard.photography::lang.plugin.name',
                 'label' => 'bedard.photography::lang.permissions.categories',
@@ -90,6 +94,12 @@ class Plugin extends PluginBase
                 'permissions'   => ['bedard.photography.*'],
                 'order'         => 500,
                 'sideMenu' => [
+                    'orders' => [
+                        'label'         => 'bedard.photography::lang.orders.controller',
+                        'icon'          => 'icon-dollar',
+                        'url'           => Backend::url('bedard/photography/orders'),
+                        'permissions'   => ['bedard.photography.access_orders'],
+                    ],
                     'galleries' => [
                         'label'         => 'bedard.photography::lang.galleries.controller',
                         'icon'          => 'icon-camera-retro',

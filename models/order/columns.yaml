@@ -1,0 +1,22 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: bedard.photography::lang.orders.list.id
+
+    name:
+        label: bedard.photography::lang.orders.list.name
+        searchable: true
+
+    email:
+        label: bedard.photography::lang.orders.list.email
+        searchable: true
+
+    amount:
+        label: bedard.photography::lang.orders.list.amount
+
+    created_at:
+        label: bedard.photography::lang.orders.list.created_at
+        type: datetime

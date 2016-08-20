@@ -196,6 +196,20 @@ class Gallery extends Model
     }
 
     /**
+     * Returns galleries that have certain photos
+     *
+     * @param  \Illuminate\Database\Query\Builder   $query
+     * @param  array                                $photoIds
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function scopeWhereHasPhotos($query, $photoIds)
+    {
+        return $query->whereHas('photos', function($photos) use ($photoIds) {
+            $photos->whereIn('id', $photoIds);
+        });
+    }
+
+    /**
      * Watermark all photos in the gallery.
      *
      * @return void

@@ -1,9 +1,11 @@
 0.1.0:
   - First version of Photography
-  - 1.0/create_galleries_table.php
-  - 1.0/create_watermarks_table.php
   - 1.0/create_rates_table.php
-  - 1.0/create_gallery_rate_table.php
+  - 1.0/create_orders_table.php
+  - 1.0/create_galleries_table.php
   - 1.0/create_categories_table.php
+  - 1.0/create_watermarks_table.php
+  - 1.0/create_order_photo_table.php
+  - 1.0/create_gallery_rate_table.php
   - 1.0/create_category_gallery_table.php
   - dev_seeder.php

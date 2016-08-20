@@ -11,6 +11,17 @@ return [
     ],
 
     //
+    // Permissions
+    //
+    'permissions' => [
+        'categories' => 'Manage categories',
+        'galleries' => 'Manage galleries',
+        'orders' => 'Manage orders',
+        'rates' => 'Manage rates',
+        'watermarks' => 'Manage watermarks',
+    ],
+
+    //
     // Categories
     //
     'categories' => [
@@ -65,13 +76,17 @@ return [
     ],
 
     //
-    // Permissions
+    // Orders
     //
-    'permissions' => [
-        'categories' => 'Manage categories',
-        'galleries' => 'Manage galleries',
-        'rates' => 'Manage rates',
-        'watermarks' => 'Manage watermarks',
+    'orders' => [
+        'controller' => 'Orders',
+        'list' => [
+            'id' => 'Order ID',
+            'name' => 'Customer name',
+            'email' => 'Email address',
+            'amount' => 'Amount',
+            'created_at' => 'Date',
+        ],
     ],
 
     //
