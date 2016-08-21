@@ -22,21 +22,28 @@ class OrderRepository
     {
         // Fetch the photo and order
         $photo = Photo::findOrFail($photoId);
-        $order = $this->getOrder() ?: $this->createOrder();
+        $order = $this->getOrder();
 
         // Attach the photo to the order if we don't already have it
-        $order->load(['photos' => function($photos) {
-            return $photos->select('system_files.id');
-        }]);
-
-        $orderPhotoIds = $order->photos->lists('id');
-
-        if (!in_array($photoId, $orderPhotoIds)) {
+        if (!$order->photos()->where('system_files.id', $photo->id)->exists()) {
             $order->photos()->attach($photo);
             $order->save();
         }
 
-        return $order;
+        return $this->load($order);
+    }
+
+    public function detachPhoto($photoId)
+    {
+        $photo = Photo::findOrFail($photoId);
+        $order = $this->getOrder();
+
+        // Detach the photo
+        $order->photos()->detach($photo);
+        $order->save();
+
+        // Load the order information
+        return $this->load($order);
     }
 
     /**
@@ -63,10 +70,33 @@ class OrderRepository
      */
     protected function getOrder()
     {
-        if ($session = Session::get($this->sessionKey)) {
-            return Order::findBySession($session);
+        // Check if we have a session going
+        $session = Session::get($this->sessionKey);
+        if ($session) {
+
+            // If we do, look for the order
+            $order = Order::findBySession($session);
+            if ($order->exists()) {
+                return $order;
+            }
         }
 
-        return null;
+        // If either of the above failed, return a new order
+        return $this->createOrder();
+    }
+
+    /**
+     * Load order information
+     *
+     * @param  \Bedard\Photography\Models\Order $order
+     * @return \Bedard\Photography\Models\Order
+     */
+    protected function load(Order $order)
+    {
+        $order->load(['photos' => function($photos) {
+            return $photos->select('system_files.id');
+        }]);
+
+        return $order;
     }
 }

@@ -96,7 +96,7 @@ class Plugin extends PluginBase
                 'sideMenu' => [
                     'orders' => [
                         'label'         => 'bedard.photography::lang.orders.controller',
-                        'icon'          => 'icon-dollar',
+                        'icon'          => 'icon-shopping-cart',
                         'url'           => Backend::url('bedard/photography/orders'),
                         'permissions'   => ['bedard.photography.access_orders'],
                     ],

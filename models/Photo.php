@@ -23,7 +23,10 @@ class Photo extends File
     ];
 
     public $belongsToMany = [
-        'orders' => 'Bedard\Photography\Models\Order',
+        'orders' => [
+            'Bedard\Photography\Models\Order',
+            'table' => 'bedard_photography_order_photo',
+        ],
     ];
 
     /**

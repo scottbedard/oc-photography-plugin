@@ -17,4 +17,9 @@ class Orders extends Controller
     {
         return $repository->attachPhoto($photoId);
     }
+
+    public function detach(OrderRepository $repository, $photoId)
+    {
+        return $repository->detachPhoto($photoId);
+    }
 }

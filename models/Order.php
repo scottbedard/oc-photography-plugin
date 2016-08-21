@@ -16,6 +16,10 @@ class Order extends Model
      */
     public $table = 'bedard_photography_orders';
 
+    protected $casts = [
+        'amount' => 'float',
+    ];
+
     /**
      * @var array Guarded fields
      */
