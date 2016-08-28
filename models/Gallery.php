@@ -30,6 +30,7 @@ class Gallery extends Model
      */
     protected $fillable = [
         'description',
+        'is_featured',
         'name',
         'slug',
         'password',

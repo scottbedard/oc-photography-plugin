@@ -16,6 +16,13 @@ class Order extends Model
     public $table = 'bedard_photography_orders';
 
     /**
+     * @var array Default attributes
+     */
+    public $attributes = [
+        'amount' => 0,
+    ];
+
+    /**
      * @var array Attribute casting
      */
     protected $casts = [

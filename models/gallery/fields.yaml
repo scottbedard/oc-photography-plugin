@@ -36,6 +36,12 @@ tabs:
             label: bedard.photography::lang.galleries.form.password
             span: right
 
+        # is_featured:
+        #     tab: bedard.photography::lang.galleries.form.tabs.options
+        #     label: bedard.photography::lang.galleries.form.is_featured
+        #     type: switch
+        #     span: right
+
         description:
             tab: bedard.photography::lang.galleries.form.tabs.options
             label: bedard.photography::lang.galleries.form.description

@@ -3,6 +3,13 @@
 # ===================================
 
 columns:
+
+    is_featured :
+        label: bedard.photography::lang.galleries.list.is_featured
+        searchable: false
+        type: partial
+        path: $/bedard/photography/models/gallery/_column_is_featured.htm
+
     name:
         label: bedard.photography::lang.galleries.list.name
         searchable: true

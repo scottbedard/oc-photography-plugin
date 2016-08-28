@@ -83,8 +83,6 @@ class Galleries extends Controller
 
     /**
      * Add galleries to a category via the toolbar.
-     *
-     * @return void
      */
     public function onAddToCategory()
     {
@@ -98,6 +96,31 @@ class Galleries extends Controller
             }
 
             Flash::success(Lang::get('bedard.photography::lang.galleries.list.attached_to_category'));
+        }
+
+        return $this->listRefresh();
+    }
+
+    /**
+     * Toggle the "is_featured" flag for one or more categories
+     */
+    public function onFeature()
+    {
+        $isFeatured = (boolean) post('is_featured');
+        $galleryIds = post('checked');
+
+        if ($galleryIds && is_array($galleryIds) && count($galleryIds)) {
+            $galleries = Gallery::find($galleryIds);
+            foreach ($galleries as $gallery) {
+                $gallery->is_featured = $isFeatured;
+                $gallery->save();
+            }
+
+            $message = $isFeatured
+                ? 'bedard.photography::lang.galleries.list.feature_add_success'
+                : 'bedard.photography::lang.galleries.list.feature_remove_success';
+
+            Flash::success(Lang::get($message));
         }
 
         return $this->listRefresh();

@@ -20,6 +20,7 @@ class CreateGalleriesTable extends Migration
             $table->integer('watermark_id')->unsigned()->nullable();
             $table->string('watermark_text')->default('');
             $table->boolean('is_watermarked')->default(false);
+            $table->boolean('is_featured')->default(false)->index();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

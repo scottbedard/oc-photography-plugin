@@ -21,7 +21,7 @@ class OrderRepository
     {
         // Fetch the photo and order
         $photo = Photo::findOrFail($photoId);
-        $order = $this->getOrder();
+        $order = $this->getOrder(true);
 
         // Attach the photo to the order if we don't already have it
         if (! $order->photos()->where('system_files.id', $photo->id)->exists()) {
@@ -52,7 +52,7 @@ class OrderRepository
     public function detachPhoto($photoId)
     {
         $photo = Photo::findOrFail($photoId);
-        $order = $this->getOrder();
+        $order = $this->getOrder(true);
 
         // Detach the photo
         $order->photos()->detach($photo);
@@ -60,6 +60,21 @@ class OrderRepository
 
         // Load the order information
         return $this->load($order);
+    }
+
+    /**
+     * Process an order
+     *
+     * @param  array    $data
+     */
+    public function process($data)
+    {
+        $order = $this->getOrder();
+        $order->name = $data['name'];
+        $order->email = $data['email'];
+        $order->stripe_token = $data['stripe_token'];
+        $order->status = 'processing';
+        $order->save();
     }
 
     /**
@@ -84,21 +99,21 @@ class OrderRepository
      *
      * @return \Bedard\Photography\Models\Order | null
      */
-    protected function getOrder()
+    protected function getOrder($create = false)
     {
         // Check if we have a session going
         $session = Session::get($this->sessionKey);
         if ($session) {
 
             // If we do, look for the order
-            $order = Order::findBySession($session);
+            $order = Order::whereStatus('pending')->findBySession($session);
             if ($order->exists()) {
                 return $order;
             }
         }
 
         // If either of the above failed, return a new order
-        return $this->createOrder();
+        return $create ? $this->createOrder() : new Order;
     }
 
     /**

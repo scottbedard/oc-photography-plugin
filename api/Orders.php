@@ -31,11 +31,22 @@ class Orders extends Controller
      * Detach a photo from the order.
      *
      * @param  \Bedard\Photography\Repositories\OrderRepository $repository
-     * @param  int                                          $photoId
+     * @param  int                                              $photoId
      * @return \Bedard\Photography\Models\Order
      */
     public function detach(OrderRepository $repository, $photoId)
     {
         return $repository->detachPhoto($photoId);
+    }
+
+    /**
+     * Process an order
+     *
+     * @param  \Bedard\Photography\Repositories\OrderRepository $repository
+     */
+    public function process(OrderRepository $repository) {
+        $data = input();
+
+        return $repository->process($data);
     }
 }
