@@ -40,11 +40,12 @@ class Orders extends Controller
     }
 
     /**
-     * Process an order
+     * Process an order.
      *
      * @param  \Bedard\Photography\Repositories\OrderRepository $repository
      */
-    public function process(OrderRepository $repository) {
+    public function process(OrderRepository $repository)
+    {
         $data = input();
 
         return $repository->process($data);

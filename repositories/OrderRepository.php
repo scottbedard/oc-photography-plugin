@@ -63,7 +63,7 @@ class OrderRepository
     }
 
     /**
-     * Process an order
+     * Process an order.
      *
      * @param  array    $data
      */

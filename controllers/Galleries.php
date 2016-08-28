@@ -102,11 +102,11 @@ class Galleries extends Controller
     }
 
     /**
-     * Toggle the "is_featured" flag for one or more categories
+     * Toggle the "is_featured" flag for one or more categories.
      */
     public function onFeature()
     {
-        $isFeatured = (boolean) post('is_featured');
+        $isFeatured = (bool) post('is_featured');
         $galleryIds = post('checked');
 
         if ($galleryIds && is_array($galleryIds) && count($galleryIds)) {
