@@ -31,7 +31,7 @@ class Settings extends Model
     ];
 
     /**
-     * Get the publishable key
+     * Get the publishable key.
      *
      * @return string
      */
@@ -43,7 +43,7 @@ class Settings extends Model
     }
 
     /**
-     * Get the secret key
+     * Get the secret key.
      *
      * @return string
      */

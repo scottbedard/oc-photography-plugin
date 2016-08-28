@@ -5,12 +5,11 @@ use Illuminate\Routing\Controller;
 
 class Orders extends Controller
 {
-
     /**
-     * Attach a photo to an order
+     * Attach a photo to an order.
      *
      * @param  \Bedard\Photography\Repositories\OrderRepository $repository
-     * @param  integer                                          $photoId
+     * @param  int                                          $photoId
      * @return \Bedard\Photography\Models\Order
      */
     public function attach(OrderRepository $repository, $photoId)
@@ -19,7 +18,7 @@ class Orders extends Controller
     }
 
     /**
-     * Fetch the current order information
+     * Fetch the current order information.
      *
      * @return \Bedard\Photography\Models\Order
      */
@@ -29,10 +28,10 @@ class Orders extends Controller
     }
 
     /**
-     * Detach a photo from the order
+     * Detach a photo from the order.
      *
      * @param  \Bedard\Photography\Repositories\OrderRepository $repository
-     * @param  integer                                          $photoId
+     * @param  int                                          $photoId
      * @return \Bedard\Photography\Models\Order
      */
     public function detach(OrderRepository $repository, $photoId)

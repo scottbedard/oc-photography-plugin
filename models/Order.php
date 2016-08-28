@@ -1,10 +1,9 @@
 <?php namespace Bedard\Photography\Models;
 
-use Bedard\Photography\Models\Gallery;
 use Model;
 
 /**
- * Order Model
+ * Order Model.
  */
 class Order extends Model
 {
@@ -71,7 +70,7 @@ class Order extends Model
     ];
 
     /**
-     * Before create
+     * Before create.
      *
      * @return void
      */
@@ -86,26 +85,25 @@ class Order extends Model
     }
 
     /**
-     * Calculate the total for the order
+     * Calculate the total for the order.
      *
      * @return float
      */
     public function calculateAmount()
     {
-
         $photos = $this->photos()->get();
         $galleries = Gallery::whereHasPhotos($photos->lists('id'))->with('rates')->get();
 
         $amount = 0;
-        $galleries->each(function($gallery) use (&$amount, $photos) {
+        $galleries->each(function ($gallery) use (&$amount, $photos) {
 
             // Determine how many photos we have in this gallery
-            $count = $photos->filter(function($photo) use ($gallery) {
+            $count = $photos->filter(function ($photo) use ($gallery) {
                 return $photo->attachment_id == $gallery->id;
             })->count();
 
             // Calculate which rate we fall into
-            $rate = $gallery->rates->filter(function($rate) use ($count) {
+            $rate = $gallery->rates->filter(function ($rate) use ($count) {
                 return $rate->photos <= $count;
             })->min('price_per_photo');
 
@@ -117,7 +115,7 @@ class Order extends Model
     }
 
     /**
-     * Find an order by it's session token and ID
+     * Find an order by it's session token and ID.
      *
      * @return Bedard\Photography\Models\Order
      */

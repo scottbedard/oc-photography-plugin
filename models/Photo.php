@@ -6,7 +6,6 @@ use System\Models\File;
 
 class Photo extends File
 {
-
     /**
      * @var array Hidden fields from array/json access
      */

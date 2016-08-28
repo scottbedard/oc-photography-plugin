@@ -6,14 +6,13 @@ use Session;
 
 class OrderRepository
 {
-
     /**
      * @var string
      */
     private $sessionKey = 'bedard_photography_order_session';
 
     /**
-     * Add a photo to a new or existing order
+     * Add a photo to a new or existing order.
      *
      * @param  array    $data
      * @return
@@ -25,7 +24,7 @@ class OrderRepository
         $order = $this->getOrder();
 
         // Attach the photo to the order if we don't already have it
-        if (!$order->photos()->where('system_files.id', $photo->id)->exists()) {
+        if (! $order->photos()->where('system_files.id', $photo->id)->exists()) {
             $order->photos()->attach($photo);
             $order->save();
         }
@@ -34,20 +33,21 @@ class OrderRepository
     }
 
     /**
-     * Return the current order
+     * Return the current order.
      *
      * @return \Bedard\Photography\Models\Order
      */
-    public function currentOrder() {
+    public function currentOrder()
+    {
         $order = $this->getOrder();
 
         return $this->load($order);
     }
 
     /**
-     * Detach a photo from the order
+     * Detach a photo from the order.
      *
-     * @param   integer   $photoId
+     * @param   int   $photoId
      */
     public function detachPhoto($photoId)
     {
@@ -63,7 +63,7 @@ class OrderRepository
     }
 
     /**
-     * Create a new order
+     * Create a new order.
      *
      * @return Bedard\Photography\Models\Order
      */
@@ -80,7 +80,7 @@ class OrderRepository
     }
 
     /**
-     * Fetch the users order
+     * Fetch the users order.
      *
      * @return \Bedard\Photography\Models\Order | null
      */
@@ -102,14 +102,14 @@ class OrderRepository
     }
 
     /**
-     * Load order information
+     * Load order information.
      *
      * @param  \Bedard\Photography\Models\Order $order
      * @return \Bedard\Photography\Models\Order
      */
     protected function load(Order $order)
     {
-        $order->load(['photos' => function($photos) {
+        $order->load(['photos' => function ($photos) {
             return $photos
                 ->select(['system_files.id', 'attachment_id'])
                 ->with(['gallery', 'watermarkedPhotos']);
