@@ -24,6 +24,13 @@ class Rate extends Model
     ];
 
     /**
+     * @var array Attribute casting
+     */
+    protected $casts = [
+        'price_per_photo' => 'float',
+    ];
+
+    /**
      * @var array Guarded fields
      */
     protected $guarded = ['*'];

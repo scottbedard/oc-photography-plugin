@@ -22,6 +22,13 @@ class Photo extends File
         ],
     ];
 
+    public $belongsTo = [
+        'gallery' => [
+            'Bedard\Photography\Models\Gallery',
+            'key' => 'attachment_id',
+        ],
+    ];
+
     public $belongsToMany = [
         'orders' => [
             'Bedard\Photography\Models\Order',

@@ -33,6 +33,22 @@ class OrderRepository
         return $this->load($order);
     }
 
+    /**
+     * Return the current order
+     *
+     * @return \Bedard\Photography\Models\Order
+     */
+    public function currentOrder() {
+        $order = $this->getOrder();
+
+        return $this->load($order);
+    }
+
+    /**
+     * Detach a photo from the order
+     *
+     * @param   integer   $photoId
+     */
     public function detachPhoto($photoId)
     {
         $photo = Photo::findOrFail($photoId);
@@ -94,7 +110,9 @@ class OrderRepository
     protected function load(Order $order)
     {
         $order->load(['photos' => function($photos) {
-            return $photos->select('system_files.id');
+            return $photos
+                ->select(['system_files.id', 'attachment_id'])
+                ->with(['gallery', 'watermarkedPhotos']);
         }]);
 
         return $order;
