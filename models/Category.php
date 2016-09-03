@@ -45,4 +45,16 @@ class Category extends Model
             'table' => 'bedard_photography_category_gallery',
         ],
     ];
+
+    public function scopeWithFeaturedGalleries($query, $isFeatured)
+    {
+        // Turn our isFeatured variable into a boolean
+        $value = filter_var($isFeatured, FILTER_VALIDATE_BOOLEAN);
+
+        return $query->with([
+            'galleries' => function ($gallery) use ($value) {
+                return $gallery->whereIsFeatured($value)->with('thumbnail');
+            },
+        ]);
+    }
 }

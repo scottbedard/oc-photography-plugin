@@ -82,6 +82,13 @@ class Gallery extends Model
         ],
     ];
 
+    public $attachOne = [
+        'thumbnail' => [
+            'System\Models\File',
+            'delete' => true,
+        ],
+    ];
+
     public $belongsTo = [
         'watermark' => 'Bedard\Photography\Models\Watermark',
     ];

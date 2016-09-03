@@ -14,15 +14,8 @@ class CategoryRepository
      */
     public function find($slug, array $options = [])
     {
-        $category = Category::whereSlug($slug)
-            ->with([
-                'galleries' => function ($q) use ($options) {
-                    // @tood: apply pagination query constraints, and eager load thumbnails
-                    return $q;
-                },
-            ])
-            ->firstOrFail();
+        $category = Category::whereSlug($slug)->with('galleries.thumbnail');
 
-        return $category;
+        return $category->firstOrFail();
     }
 }

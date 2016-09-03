@@ -57,6 +57,7 @@ return [
                 'photos' => 'Photos',
                 'rates' => 'Rates',
             ],
+            'thumbnail' => 'Thumbnail',
             'watermark' => 'Select watermark',
             'watermark_text' => 'Watermark text',
         ],

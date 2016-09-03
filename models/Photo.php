@@ -57,11 +57,24 @@ class Photo extends File
      */
     public function createWatermarkedPhoto()
     {
-        // Create a temporary file with the watermark
+        // Create a temporary path and Image instances for our source and watermark
         $tempPath = temp_path("watermark_{$this->getFileName()}");
-        $image = Image::make($this->getLocalPath());
-        $image->insert($this->attachment->watermark->image->getLocalPath());
-        $image->save($tempPath);
+        $source = Image::make($this->getLocalPath());
+        $watermark = Image::make($this->attachment->watermark->image->getLocalPath());
+
+        // Resize the watermark to match the size of the image
+        $sourceWidth = $source->width();
+        $sourceHeight = $source->height();
+        $watermarkWidth = $sourceHeight >= $sourceWidth ? $sourceWidth : null;
+        $watermarkHeight = $sourceHeight < $sourceWidth ? $sourceHeight : null;
+
+        $watermark->resize($watermarkHeight, $watermarkWidth, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        // Insert the watermark in the center of our source image, and save it
+        $source->insert($watermark, 'center');
+        $source->save($tempPath);
 
         // Convert that temporary file to a system file and clean up our mess
         $file = File::make()->fromFile($tempPath);

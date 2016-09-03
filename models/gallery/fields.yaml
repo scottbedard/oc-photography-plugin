@@ -17,12 +17,12 @@ fields:
 tabs:
     stretch: true
     fields:
-        photo_price:
-            tab: bedard.photography::lang.galleries.form.tabs.options
-            label: bedard.photography::lang.galleries.form.photo_price
-            span: left
-            type: number
-            placeholder: '0.00'
+        # photo_price:
+        #     tab: bedard.photography::lang.galleries.form.tabs.options
+        #     label: bedard.photography::lang.galleries.form.photo_price
+        #     span: left
+        #     type: number
+        #     placeholder: '0.00'
 
         # published_at:
         #     tab: bedard.photography::lang.galleries.form.tabs.options
@@ -31,16 +31,22 @@ tabs:
         #     type: datepicker
         #     mode: date
 
-        password:
-            tab: bedard.photography::lang.galleries.form.tabs.options
-            label: bedard.photography::lang.galleries.form.password
-            span: right
+        # password:
+        #     tab: bedard.photography::lang.galleries.form.tabs.options
+        #     label: bedard.photography::lang.galleries.form.password
+        #     span: right
 
         # is_featured:
         #     tab: bedard.photography::lang.galleries.form.tabs.options
         #     label: bedard.photography::lang.galleries.form.is_featured
         #     type: switch
         #     span: right
+
+        # thumbnail:
+        #     tab: bedard.photography::lang.galleries.form.tabs.options
+        #     label: bedard.photography::lang.galleries.form.thumbnail
+        #     type: fileupload
+        #     mode: image
 
         description:
             tab: bedard.photography::lang.galleries.form.tabs.options
