@@ -1,0 +1,10 @@
+<?php if ($record->status === 'processing'): ?>
+    <i class="icon-spinner" style="color: #1991d1"></i>
+    <span><?= e(trans('bedard.photography::lang.orders.list.status_processing')) ?></span>
+<?php elseif ($record->status === 'complete'): ?>
+    <i class="icon-check" style="color: #8da85e"></i>
+    <span><?= e(trans('bedard.photography::lang.orders.list.status_complete')) ?></span>
+<?php elseif ($record->status === 'failed'): ?>
+    <i class="icon-times" style="color: #ff5722"></i>
+    <span><?= e(trans('bedard.photography::lang.orders.list.status_failed')) ?></span>
+<?php endif; ?>

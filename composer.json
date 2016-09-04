@@ -22,6 +22,7 @@
     "require": {
         "php": ">=5.5.0",
         "owl/list-delete": "~1.0@dev",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "stripe/stripe-php": "^3.21"
     }
 }

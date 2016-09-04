@@ -1,6 +1,9 @@
 <?php namespace Bedard\Photography\Models;
 
+use Exception;
 use Model;
+use Stripe;
+use Queue;
 
 /**
  * Order Model.
@@ -119,6 +122,69 @@ class Order extends Model
         });
 
         $this->amount = $amount;
+    }
+
+    /**
+     * Charge the user
+     *
+     * @return void
+     */
+    public function charge()
+    {
+        $customer = Stripe\Customer::create([
+            'email' => $this->email,
+            'source'  => $this->stripe_token,
+        ]);
+
+        $charge = Stripe\Charge::create(array(
+            'customer' => $customer->id,
+            'amount'   => $this->amountInCents,
+            'currency' => 'usd'
+        ));
+
+        $this->status = 'complete';
+        $this->save();
+    }
+
+    /**
+     * Return the amount of the order in cents
+     *
+     * @return integer
+     */
+    public function getAmountInCentsAttribute() {
+        return $this->amount * 100;
+    }
+
+    /**
+     * Mark a payment as failed
+     *
+     * @return void
+     */
+    public function paymentFailed()
+    {
+        $this->status = 'failed';
+        $this->save();
+    }
+
+    /**
+     * Queue the stripe charge
+     *
+     * @return void
+     */
+    public function queueStripePayment() {
+        $id = $this->id;
+        Queue::push(function($job) use ($id) {
+            try {
+                $order = Order::findOrFail($id);
+                $order->charge();
+            }
+
+            catch (Exception $e) {
+                $order->paymentFailed($e->getMessage());
+            }
+
+            $job->delete();
+        });
     }
 
     /**

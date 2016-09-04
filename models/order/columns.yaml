@@ -20,3 +20,8 @@ columns:
     created_at:
         label: bedard.photography::lang.orders.list.created_at
         type: datetime
+
+    status:
+        label: bedard.photography::lang.orders.list.status
+        type: partial
+        path: $/bedard/photography/models/order/_column_status.htm

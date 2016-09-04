@@ -75,6 +75,7 @@ class OrderRepository
         $order->stripe_token = $data['stripe_token'];
         $order->status = 'processing';
         $order->save();
+        $order->queueStripePayment();
     }
 
     /**

@@ -2,7 +2,9 @@
 
 use App;
 use Backend;
+use Bedard\Photography\Models\Settings;
 use Illuminate\Foundation\AliasLoader;
+use Stripe;
 use System\Classes\PluginBase;
 
 /**
@@ -17,10 +19,14 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        // Register Intervention\Image
         App::register('\Intervention\Image\ImageServiceProvider');
-
         $alias = AliasLoader::getInstance();
         $alias->alias('Image', '\Intervention\Image\Facades\Image');
+
+        // Set up Stripe API keys
+        $stripeKey = Settings::getStripeSecretKey();
+        Stripe\Stripe::setApiKey($stripeKey);
     }
 
     /**

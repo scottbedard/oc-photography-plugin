@@ -87,11 +87,15 @@ return [
     'orders' => [
         'controller' => 'Orders',
         'list' => [
-            'id' => 'Order ID',
-            'name' => 'Customer name',
-            'email' => 'Email address',
             'amount' => 'Amount',
             'created_at' => 'Date',
+            'email' => 'Email address',
+            'id' => 'Order ID',
+            'name' => 'Customer name',
+            'status' => 'Status',
+            'status_complete' => 'Complete',
+            'status_failed' => 'Failed',
+            'status_processing' => 'Processing',
         ],
     ],
 
