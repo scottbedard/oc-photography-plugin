@@ -125,7 +125,7 @@ class Order extends Model
     }
 
     /**
-     * Charge the user
+     * Charge the user.
      *
      * @return void
      */
@@ -136,27 +136,28 @@ class Order extends Model
             'source'  => $this->stripe_token,
         ]);
 
-        $charge = Stripe\Charge::create(array(
+        $charge = Stripe\Charge::create([
             'customer' => $customer->id,
             'amount'   => $this->amountInCents,
-            'currency' => 'usd'
-        ));
+            'currency' => 'usd',
+        ]);
 
         $this->status = 'complete';
         $this->save();
     }
 
     /**
-     * Return the amount of the order in cents
+     * Return the amount of the order in cents.
      *
-     * @return integer
+     * @return int
      */
-    public function getAmountInCentsAttribute() {
+    public function getAmountInCentsAttribute()
+    {
         return $this->amount * 100;
     }
 
     /**
-     * Mark a payment as failed
+     * Mark a payment as failed.
      *
      * @return void
      */
@@ -167,19 +168,18 @@ class Order extends Model
     }
 
     /**
-     * Queue the stripe charge
+     * Queue the stripe charge.
      *
      * @return void
      */
-    public function queueStripePayment() {
+    public function queueStripePayment()
+    {
         $id = $this->id;
-        Queue::push(function($job) use ($id) {
+        Queue::push(function ($job) use ($id) {
             try {
                 $order = Order::findOrFail($id);
                 $order->charge();
-            }
-
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 $order->paymentFailed($e->getMessage());
             }
 
