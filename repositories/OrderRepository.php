@@ -63,6 +63,23 @@ class OrderRepository
     }
 
     /**
+     * Fetch an order and it's photos for download
+     *
+     * @param  string                           $token  The unique token to identify the order
+     * @return \Bedard\Photography\Models\Order
+     */
+    public function download($token)
+    {
+        $order = Order::whereDownloadToken($token)
+            ->with('photos')
+            ->firstOrFail();
+
+        $order->logStatus('downloaded');
+
+        return $order;
+    }
+
+    /**
      * Process an order.
      *
      * @param  array    $data

@@ -211,6 +211,9 @@ class Order extends Model
     {
         if (is_null($status)) {
             $status = $this->status;
+        } else {
+            $this->status = $status;
+            $this->save();
         }
 
         $this->logs()->create(['status' => $status]);
@@ -223,15 +226,12 @@ class Order extends Model
      */
     public function paymentComplete()
     {
-        $this->status = 'complete';
-
         // Create a unique download token
         do {
-            $this->download_token = str_random(10);
+            $this->download_token = str_random(12);
         } while (self::whereDownloadToken($this->download_token)->exists());
 
-        $this->save();
-        $this->logStatus();
+        $this->logStatus('complete');
 
         // Send the success email
         Mail::send('bedard.photography::mail.complete', $this->attributes, function($message) {
@@ -246,9 +246,7 @@ class Order extends Model
      */
     public function paymentFailed()
     {
-        $this->status = 'failed';
-        $this->save();
-        $this->logStatus();
+        $this->logStatus('failed');
 
         // Send the failed email
         Mail::send('bedard.photography::mail.failed', $this->attributes, function($message) {

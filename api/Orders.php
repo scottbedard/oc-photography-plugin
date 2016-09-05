@@ -40,6 +40,18 @@ class Orders extends Controller
     }
 
     /**
+     * Fetch an order and it's photos for download
+     *
+     * @param  \Bedard\Photography\Repositories\OrderRepository $repository
+     * @param  string                                           $token
+     * @return \Bedard\Photography\Models\Order
+     */
+    public function download(OrderRepository $repository, $token)
+    {
+        return $repository->download($token);
+    }
+
+    /**
      * Process an order.
      *
      * @param  \Bedard\Photography\Repositories\OrderRepository $repository
