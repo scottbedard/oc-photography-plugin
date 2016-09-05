@@ -82,6 +82,14 @@ return [
     ],
 
     //
+    // Mail
+    //
+    'mail' => [
+        'complete_description' => 'Instructions for downloading photos.',
+        'failed_description' => 'Informing the customer their payment was rejected.',
+    ],
+
+    //
     // Orders
     //
     'orders' => [

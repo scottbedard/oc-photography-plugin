@@ -4,6 +4,7 @@ use App;
 use Backend;
 use Bedard\Photography\Models\Settings;
 use Illuminate\Foundation\AliasLoader;
+use Lang;
 use Stripe;
 use System\Classes\PluginBase;
 
@@ -52,6 +53,19 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [];
+    }
+
+    /**
+     * Register mail templates
+     *
+     * @return array
+     */
+    public function registerMailTemplates()
+    {
+        return [
+            'bedard.photography::mail.complete' => Lang::get('bedard.photography::lang.mail.complete_description'),
+            'bedard.photography::mail.failed' => Lang::get('bedard.photography::lang.mail.failed_description'),
+        ];
     }
 
     /**
