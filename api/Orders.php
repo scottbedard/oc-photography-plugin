@@ -52,10 +52,10 @@ class Orders extends Controller
     }
 
     /**
-     * Download a photo
+     * Download a photo.
      *
      * @param  \Bedard\Photography\Repositories\OrderRepository $repository
-     * @param  integer                                          $id
+     * @param  int                                          $id
      * @param  string                                           $diskName
      * @return Response
      */

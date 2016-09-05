@@ -81,9 +81,9 @@ class OrderRepository
     }
 
     /**
-     * Download a photo
+     * Download a photo.
      *
-     * @param  integer $id
+     * @param  int $id
      * @param  string  $diskName
      * @return array
      */
@@ -93,7 +93,7 @@ class OrderRepository
 
         return [
             'name' => $file->file_name,
-            'path' => public_path() . $file->getPath(),
+            'path' => public_path().$file->getPath(),
         ];
     }
 
