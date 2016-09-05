@@ -52,6 +52,21 @@ class Orders extends Controller
     }
 
     /**
+     * Download a photo
+     *
+     * @param  \Bedard\Photography\Repositories\OrderRepository $repository
+     * @param  integer                                          $id
+     * @param  string                                           $diskName
+     * @return Response
+     */
+    public function file(OrderRepository $repository, $id, $diskName)
+    {
+        $file = $repository->file($id, $diskName);
+
+        return response()->download($file['path'], $file['name']);
+    }
+
+    /**
      * Process an order.
      *
      * @param  \Bedard\Photography\Repositories\OrderRepository $repository

@@ -284,4 +284,14 @@ class Order extends Model
             ->whereSessionToken($session['token'])
             ->find($session['id']);
     }
+
+    /**
+     * Find orders that are not complete.
+     *
+     * @return Bedard\Photography\Models\Order
+     */
+    public function scopeNotComplete($query)
+    {
+        return $query->where('status', '<>', 'complete');
+    }
 }

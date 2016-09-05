@@ -18,3 +18,4 @@ Route::post('api/bedard/photography/orders/process', 'Bedard\Photography\Api\Ord
 Route::get('api/bedard/photography/orders/download/{token}', 'Bedard\Photography\Api\Orders@download');
 Route::post('api/bedard/photography/orders/attach/{id}', 'Bedard\Photography\Api\Orders@attach');
 Route::delete('api/bedard/photography/orders/detach/{id}', 'Bedard\Photography\Api\Orders@detach');
+Route::get('api/bedard/photography/orders/file/{id}/{diskName}', 'Bedard\Photography\Api\Orders@file');

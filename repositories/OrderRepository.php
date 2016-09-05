@@ -3,6 +3,7 @@
 use Bedard\Photography\Models\Order;
 use Bedard\Photography\Models\Photo;
 use Session;
+use System\Models\File;
 
 class OrderRepository
 {
@@ -80,6 +81,23 @@ class OrderRepository
     }
 
     /**
+     * Download a photo
+     *
+     * @param  integer $id
+     * @param  string  $diskName
+     * @return array
+     */
+    public function file($id, $diskName)
+    {
+        $file = File::whereDiskName($diskName)->findOrFail($id);
+
+        return [
+            'name' => $file->file_name,
+            'path' => public_path() . $file->getPath(),
+        ];
+    }
+
+    /**
      * Process an order.
      *
      * @param  array    $data
@@ -121,10 +139,10 @@ class OrderRepository
     {
         // Check if we have a session going
         $session = Session::get($this->sessionKey);
-        if ($session) {
 
+        if ($session) {
             // If we do, look for the order
-            $order = Order::whereStatus('pending')->findBySession($session);
+            $order = Order::notComplete()->findBySession($session);
             if ($order->exists()) {
                 return $order;
             }
