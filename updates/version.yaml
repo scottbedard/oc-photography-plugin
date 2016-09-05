@@ -1,5 +1,6 @@
 0.1.0:
   - First version of Photography
+  - 1.0/modify_cache_table.php
   - 1.0/create_rates_table.php
   - 1.0/create_orders_table.php
   - 1.0/create_galleries_table.php
