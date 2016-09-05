@@ -56,7 +56,7 @@ class Plugin extends PluginBase
     }
 
     /**
-     * Register mail templates
+     * Register mail templates.
      *
      * @return array
      */
