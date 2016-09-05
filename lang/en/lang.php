@@ -132,6 +132,8 @@ return [
     'settings' => [
         'controller' => 'Settings',
         'description' => 'Manage photography settings',
+        'stripe_attempts' => 'Charge attempts',
+        'stripe_attempts_comment' => 'The number of times to attempt charging a user before failing the order.',
         'stripe_secret_key' => 'Stripe secret key',
         'stripe_secret_key_placeholder' => 'Enter your secret API key',
         'stripe_publishable_key' => 'Stripe publishable key',

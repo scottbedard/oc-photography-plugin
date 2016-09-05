@@ -13,3 +13,8 @@ fields:
         label: bedard.photography::lang.settings.stripe_publishable_key
         placeholder: bedard.photography::lang.settings.stripe_publishable_key_placeholder
         span: right
+
+    stripe_attempts:
+        label: bedard.photography::lang.settings.stripe_attempts
+        comment: bedard.photography::lang.settings.stripe_attempts_comment
+        placeholder: 1

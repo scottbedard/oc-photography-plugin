@@ -26,9 +26,20 @@ class Settings extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'stripe_attempts' => 'integer|min:1',
         'stripe_secret_key' => 'required',
         'stripe_publishable_key' => 'required',
     ];
+
+    /**
+     * Get the Stripe attempts number
+     *
+     * @return integer
+     */
+    public static function getStripeAttempts()
+    {
+        return (int) self::get('stripe_attempts', 1);
+    }
 
     /**
      * Get the publishable key.

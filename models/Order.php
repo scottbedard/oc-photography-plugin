@@ -1,6 +1,7 @@
 <?php namespace Bedard\Photography\Models;
 
 use Exception;
+use Mail;
 use Model;
 use Stripe;
 use Queue;
@@ -71,6 +72,12 @@ class Order extends Model
         ],
     ];
 
+    public $hasMany = [
+        'logs' => [
+            'Bedard\Photography\Models\OrderLog',
+        ],
+    ];
+
     /**
      * @var array Validation rules
      */
@@ -78,6 +85,16 @@ class Order extends Model
         'amount' => 'numeric|min:0',
         'email' => 'email',
     ];
+
+    /**
+     * After created
+     *
+     * @return void
+     */
+    public function afterCreate()
+    {
+        $this->logStatus('created');
+    }
 
     /**
      * Before create.
@@ -89,6 +106,11 @@ class Order extends Model
         $this->session_token = str_random(40);
     }
 
+    /**
+     * Before save.
+     *
+     * @return void
+     */
     public function beforeSave()
     {
         $this->calculateAmount();
@@ -131,19 +153,32 @@ class Order extends Model
      */
     public function charge()
     {
-        $customer = Stripe\Customer::create([
-            'email' => $this->email,
-            'source'  => $this->stripe_token,
-        ]);
+        // Attempt to charge the user
+        try {
+            $this->incrementStripeAttempts();
 
-        $charge = Stripe\Charge::create([
-            'customer' => $customer->id,
-            'amount'   => $this->amountInCents,
-            'currency' => 'usd',
-        ]);
+            $customer = Stripe\Customer::create([
+                'email' => $this->email,
+                'source'  => $this->stripe_token,
+            ]);
 
-        $this->status = 'complete';
-        $this->save();
+            $charge = Stripe\Charge::create([
+                'amount'   => $this->amountInCents,
+                'currency' => 'usd',
+                'customer' => $customer->id,
+            ]);
+
+            $this->paymentComplete();
+        }
+
+        // If anything went wrong, mark the order as failed and re-queue it
+        catch (Exception $e) {
+            if ($this->stripe_attempts < Settings::getStripeAttempts()) {
+                $this->queueStripePayment();
+            } else {
+                $this->paymentFailed($e->getMessage());
+            }
+        }
     }
 
     /**
@@ -157,6 +192,54 @@ class Order extends Model
     }
 
     /**
+     * Increment the number of payment attempts made
+     *
+     * @return void
+     */
+    public function incrementStripeAttempts()
+    {
+        $this->stripe_attempts += 1;
+        $this->save();
+    }
+
+    /**
+     * Log the current status
+     *
+     * @return void
+     */
+    public function logStatus($status = null)
+    {
+        if (is_null($status)) {
+            $status = $this->status;
+        }
+
+        $this->logs()->create(['status' => $status]);
+    }
+
+    /**
+     * Mark a payment as complete
+     *
+     * @return void
+     */
+    public function paymentComplete()
+    {
+        $this->status = 'complete';
+
+        // Create a unique download token
+        do {
+            $this->download_token = str_random(10);
+        } while (self::whereDownloadToken($this->download_token)->exists());
+
+        $this->save();
+        $this->logStatus();
+
+        // Send the success email
+        Mail::send('bedard.photography::mail.complete', $this->attributes, function($message) {
+            $message->to($this->email, $this->name);
+        });
+    }
+
+    /**
      * Mark a payment as failed.
      *
      * @return void
@@ -165,6 +248,12 @@ class Order extends Model
     {
         $this->status = 'failed';
         $this->save();
+        $this->logStatus();
+
+        // Send the failed email
+        Mail::send('bedard.photography::mail.failed', $this->attributes, function($message) {
+            $message->to($this->email, $this->name);
+        });
     }
 
     /**
@@ -175,14 +264,13 @@ class Order extends Model
     public function queueStripePayment()
     {
         $id = $this->id;
-        Queue::push(function ($job) use ($id) {
-            try {
-                $order = Order::findOrFail($id);
-                $order->charge();
-            } catch (Exception $e) {
-                $order->paymentFailed($e->getMessage());
-            }
 
+        if ($this->stripe_attempts === 0) {
+            $this->logStatus();
+        }
+
+        Queue::push(function ($job) use ($id) {
+            $order = Order::findOrFail($id)->charge();
             $job->delete();
         });
     }
