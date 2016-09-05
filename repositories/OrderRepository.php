@@ -63,7 +63,7 @@ class OrderRepository
     }
 
     /**
-     * Fetch an order and it's photos for download
+     * Fetch an order and it's photos for download.
      *
      * @param  string                           $token  The unique token to identify the order
      * @return \Bedard\Photography\Models\Order

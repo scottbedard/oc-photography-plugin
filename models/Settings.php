@@ -32,9 +32,9 @@ class Settings extends Model
     ];
 
     /**
-     * Get the Stripe attempts number
+     * Get the Stripe attempts number.
      *
-     * @return integer
+     * @return int
      */
     public static function getStripeAttempts()
     {

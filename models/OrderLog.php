@@ -3,11 +3,10 @@
 use Model;
 
 /**
- * OrderLog Model
+ * OrderLog Model.
  */
 class OrderLog extends Model
 {
-
     /**
      * @var string The database table used by the model.
      */
@@ -33,5 +32,4 @@ class OrderLog extends Model
             'Bedard\Photography\Models\Order',
         ],
     ];
-
 }

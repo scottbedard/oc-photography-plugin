@@ -87,7 +87,7 @@ class Order extends Model
     ];
 
     /**
-     * After created
+     * After created.
      *
      * @return void
      */
@@ -192,7 +192,7 @@ class Order extends Model
     }
 
     /**
-     * Increment the number of payment attempts made
+     * Increment the number of payment attempts made.
      *
      * @return void
      */
@@ -203,7 +203,7 @@ class Order extends Model
     }
 
     /**
-     * Log the current status
+     * Log the current status.
      *
      * @return void
      */
@@ -220,7 +220,7 @@ class Order extends Model
     }
 
     /**
-     * Mark a payment as complete
+     * Mark a payment as complete.
      *
      * @return void
      */
@@ -234,7 +234,7 @@ class Order extends Model
         $this->logStatus('complete');
 
         // Send the success email
-        Mail::send('bedard.photography::mail.complete', $this->attributes, function($message) {
+        Mail::send('bedard.photography::mail.complete', $this->attributes, function ($message) {
             $message->to($this->email, $this->name);
         });
     }
@@ -249,7 +249,7 @@ class Order extends Model
         $this->logStatus('failed');
 
         // Send the failed email
-        Mail::send('bedard.photography::mail.failed', $this->attributes, function($message) {
+        Mail::send('bedard.photography::mail.failed', $this->attributes, function ($message) {
             $message->to($this->email, $this->name);
         });
     }

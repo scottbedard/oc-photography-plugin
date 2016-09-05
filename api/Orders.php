@@ -40,7 +40,7 @@ class Orders extends Controller
     }
 
     /**
-     * Fetch an order and it's photos for download
+     * Fetch an order and it's photos for download.
      *
      * @param  \Bedard\Photography\Repositories\OrderRepository $repository
      * @param  string                                           $token
