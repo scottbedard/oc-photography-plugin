@@ -1,5 +1,6 @@
 <?php namespace Bedard\Photography\Models;
 
+use Crypt;
 use Model;
 
 class Settings extends Model
@@ -47,7 +48,13 @@ class Settings extends Model
      */
     public static function getStripePublishableKey()
     {
-        return self::get('stripe_publishable_key');
+        $key = self::get('stripe_publishable_key');
+
+        if ($key) {
+            $key = Crypt::decrypt($key);
+        }
+
+        return $key;
     }
 
     /**
@@ -57,6 +64,12 @@ class Settings extends Model
      */
     public static function getStripeSecretKey()
     {
-        return self::get('stripe_secret_key');
+        $key = self::get('stripe_secret_key');
+
+        if ($key) {
+            $key = Crypt::decrypt($key);
+        }
+
+        return $key;
     }
 }
