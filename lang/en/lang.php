@@ -138,6 +138,12 @@ return [
         'stripe_secret_key_placeholder' => 'Enter your secret API key',
         'stripe_publishable_key' => 'Stripe publishable key',
         'stripe_publishable_key_placeholder' => 'Enter your publishable API key',
+        'tabs' => [
+            'payment' => 'Payment',
+            'watermarking' => 'Watermarking',
+        ],
+        'watermark_sizes' => 'Watermark sizes',
+        'watermark_sizes_invalid' => 'Watermark sizes may only be positive whole numbers.',
     ],
 
     //

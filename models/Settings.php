@@ -23,6 +23,13 @@ class Settings extends Model
     ];
 
     /**
+     * @var array Jsonable attributes
+     */
+    protected $jsonable = [
+        'watermark_sizes',
+    ];
+
+    /**
      * @var array Validation rules
      */
     public $rules = [
@@ -71,5 +78,15 @@ class Settings extends Model
         }
 
         return $key;
+    }
+
+    /**
+     * Get the watermark sizes.
+     *
+     * @return array
+     */
+    public static function getWatermarkSizes()
+    {
+        return self::get('watermark_sizes', []);
     }
 }

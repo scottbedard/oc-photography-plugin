@@ -56,6 +56,21 @@ class Plugin extends PluginBase
     }
 
     /**
+     * Register form widgets.
+     *
+     * @return array
+     */
+    public function registerFormWidgets()
+    {
+        return [
+            'Owl\FormWidgets\Tagbox\Widget' => [
+                'label' => 'Tagbox',
+                'code'  => 'owl-tagbox'
+            ],
+        ];
+    }
+
+    /**
      * Register mail templates.
      *
      * @return array
