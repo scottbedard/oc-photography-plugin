@@ -1,6 +1,5 @@
 <?php namespace Bedard\Photography\Models;
 
-use Bedard\Photography\Models\Settings;
 use Image;
 use Symfony\Component\Filesystem\Filesystem;
 use System\Models\File;
@@ -85,8 +84,8 @@ class Photo extends File
 
         // Create watermark versions at our given sizes
         foreach (Settings::getWatermarkSizes() as $width) {
-            $resizedPath = temp_path('watermark_' . $width . '_' . $this->getFileName());
-            $resizedWatermark = $source->resize($width, null, function($constraint) {
+            $resizedPath = temp_path('watermark_'.$width.'_'.$this->getFileName());
+            $resizedWatermark = $source->resize($width, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             $source->save($resizedPath);
@@ -104,7 +103,7 @@ class Photo extends File
      */
     public function createWatermarks()
     {
-        foreach($this->createWatermarkedPhoto() as $file) {
+        foreach ($this->createWatermarkedPhoto() as $file) {
             $this->watermarkedPhotos()->add($file);
         }
     }

@@ -65,7 +65,7 @@ class Plugin extends PluginBase
         return [
             'Owl\FormWidgets\Tagbox\Widget' => [
                 'label' => 'Tagbox',
-                'code'  => 'owl-tagbox'
+                'code'  => 'owl-tagbox',
             ],
         ];
     }
