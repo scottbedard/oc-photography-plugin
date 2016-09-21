@@ -36,17 +36,19 @@ tabs:
         #     label: bedard.photography::lang.galleries.form.password
         #     span: right
 
-        # is_featured:
-        #     tab: bedard.photography::lang.galleries.form.tabs.options
-        #     label: bedard.photography::lang.galleries.form.is_featured
-        #     type: switch
-        #     span: right
+        thumbnail:
+            tab: bedard.photography::lang.galleries.form.tabs.options
+            label: bedard.photography::lang.galleries.form.thumbnail
+            type: fileupload
+            mode: image
+            span: left
+            cssClass: small-single-file-upload
 
-        # thumbnail:
-        #     tab: bedard.photography::lang.galleries.form.tabs.options
-        #     label: bedard.photography::lang.galleries.form.thumbnail
-        #     type: fileupload
-        #     mode: image
+        is_featured:
+            tab: bedard.photography::lang.galleries.form.tabs.options
+            label: bedard.photography::lang.galleries.form.is_featured
+            type: switch
+            span: right
 
         description:
             tab: bedard.photography::lang.galleries.form.tabs.options

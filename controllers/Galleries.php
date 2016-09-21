@@ -32,6 +32,8 @@ class Galleries extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Bedard.Photography', 'photography', 'galleries');
+
+        $this->addCss('/plugins/bedard/photography/assets/compiled/style.min.css');
     }
 
     /**
