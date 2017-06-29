@@ -60,20 +60,24 @@ class Photo extends File
         // Create a temporary path and Image instances for our source and watermark
         $tempPath = temp_path("watermark_{$this->getFileName()}");
         $source = Image::make($this->getLocalPath());
-        $watermark = Image::make($this->attachment->watermark->image->getLocalPath());
 
-        // Resize the watermark to match the size of the image
-        $sourceWidth = $source->width();
-        $sourceHeight = $source->height();
-        $watermarkWidth = $sourceHeight >= $sourceWidth ? $sourceWidth : null;
-        $watermarkHeight = $sourceHeight < $sourceWidth ? $sourceHeight : null;
+        if (! is_null($this->attachment->watermark_id)) {
+            $watermark = Image::make($this->attachment->watermark->image->getLocalPath());
 
-        $watermark->resize($watermarkHeight, $watermarkWidth, function ($constraint) {
-            $constraint->aspectRatio();
-        });
+            // Resize the watermark to match the size of the image
+            $sourceWidth = $source->width();
+            $sourceHeight = $source->height();
+            $watermarkWidth = $sourceHeight >= $sourceWidth ? $sourceWidth : null;
+            $watermarkHeight = $sourceHeight < $sourceWidth ? $sourceHeight : null;
 
-        // Insert the watermark in the center of our source image, and save it
-        $source->insert($watermark, 'center');
+            $watermark->resize($watermarkHeight, $watermarkWidth, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            // Insert the watermark in the center of our source image, and save it
+            $source->insert($watermark, 'center');
+        }
+
         $source->save($tempPath);
 
         // Convert that temporary file to a system file
@@ -116,10 +120,10 @@ class Photo extends File
     public function syncWatermarks()
     {
         $this->deleteWatermarks();
+
         $this->load('attachment.watermark.image');
-        if (! is_null($this->attachment->watermark_id)) {
-            $this->createWatermarks();
-        }
+
+        $this->createWatermarks();
     }
 
     /**
